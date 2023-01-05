@@ -1,26 +1,30 @@
 package lab2.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Comparator;
 
 @Entity
-public class Guest extends User {
+@Table(name = "guests")
+public class Guest extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
-
-    @OneToOne(mappedBy = "user")
-    @JoinTable(
-            name = "guest",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
-    )
-    private Long idUser;
 
     private boolean child;
 
-    public Guest(String firstName, String lastName, String telephoneNumber, boolean child) {
-        super(firstName, lastName, telephoneNumber);
+    @OneToOne(mappedBy = "guests")
+    private Person person;
+
+    public Guest(String firstName, String lastName, 
+                 LocalDate dateOfBirth, String gender, 
+                 String telephoneNumber, boolean child) {
+        super(firstName, lastName, dateOfBirth, gender, telephoneNumber);
         this.child = child;
+    }
+
+    public Guest() {
     }
 
     public boolean isChild() {

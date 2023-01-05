@@ -32,6 +32,10 @@ public class Room {
     @OneToOne(cascade = CascadeType.ALL)
     private Reservation reservation;
 
+    public Room() {
+
+    }
+
     public enum RoomType {
         Economy, Balcony, Business, Luxury
     }

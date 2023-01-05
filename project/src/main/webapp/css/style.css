@@ -1,0 +1,133 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    transition: 0.4s ease;
+}
+
+.registration-title {
+    text-align: center;
+    margin: 20px 0 30px;
+}
+
+.registration-form {
+    width: 50%;
+    margin: auto;
+}
+
+.col-md-12 {
+    /*display: flex;*/
+    /*justify-content: space-evenly;*/
+    margin-bottom: 1rem;
+}
+
+.col-md-12 .col-md-4 {
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*flex-wrap: wrap;*/
+    /*order: 1;*/
+    /*width: 50%;*/
+}
+
+.col-md-12:nth-child(n+3) .col-md-4 {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.col-md-4 .form-label {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 40%;
+    margin: 0;
+}
+
+.form-control {
+    width: 60%;
+}
+
+.telephone-number-input {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+}
+
+.telephone-number-input .form-control {
+    width: 90%;
+}
+
+.valid-feedback, .invalid-feedback {
+    text-align: center;
+}
+
+.col-12 {
+    display: flex;
+    justify-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+    margin: 20px auto;
+}
+
+.datepicker {
+    background-color: #fff;
+    border: none;
+}
+
+.datepicker-dropdown {
+    top: 0;
+    left: 0;
+}
+
+.datepicker table tr td.today, span.focused {
+    border-radius: 50% !important;
+}
+
+.next .disabled {
+    background-color: #2130ab !important;
+    visibility: visible;
+}
+
+thead tr:nth-child(2) {
+    background-color: #2130ab !important;
+    width: 100%;
+}
+
+thead tr:nth-child(3) th {
+    color: #2130ab !important;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.dow, .old-day, .day, .new-day {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 0 !important;
+}
+
+.old-day:hover, .day:hover, .new-day:hover, .month:hover, .year:hover, .decade:hover, .century:hover {
+    border-radius: 50% !important;
+    background-color: #eee;
+}
+
+.active {
+    border-radius: 50% !important;
+    background-image: linear-gradient(#90CAF9, #64B5F6) !important;
+    color: #fff !important;
+}
+
+.prev, .next, .datepicker-switch {
+    border-radius: 0 !important;
+    padding: 20px 10px !important;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.prev:hover, .next:hover, .datepicker-switch:hover {
+    background-color: inherit !important;
+    opacity: 1;
+}
