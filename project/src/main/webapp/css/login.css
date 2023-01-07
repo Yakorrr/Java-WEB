@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.main_div {
+    max-width: 500px;
+    width: 50%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.main_div .title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.main_div .title::before {
+    content: "";
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.main_div .social_icons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.social_icons a {
+    display: block;
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s linear;
+}
+
+.social_icons a span {
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.social_icons a:first-child {
+    margin-right: 5px;
+    background: white;
+    color: #444;
+    border: thin solid #888;
+}
+
+.social_icons a:first-child:hover {
+    background: #ccc;
+}
+
+.social_icons a:nth-child(2) {
+    background: #4267B2;
+}
+
+.social_icons a:nth-child(2):hover {
+    background: #375695;
+}
+
+.social_icons a:last-child {
+    margin-left: 5px;
+    background: #1DA1F2;
+}
+
+.social_icons a:last-child:hover {
+    background: #0d8bd9;
+}
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+form {
+    margin-top: 25px;
+}
+
+form .input_box {
+    height: 45px;
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+}
+
+.input_box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    border-bottom-width: 2px;
+    padding-left: 45px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input_box input:focus, .input_box input:valid {
+    border-color: #9b59b6;
+}
+
+.input_box .icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: grey;
+}
+
+form .option_div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.option_div .check_box {
+    display: flex;
+    align-items: center;
+}
+
+.option_div span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.option_div .forget_div a {
+    font-size: 16px;
+    color: #be2edd;
+}
+
+.button input {
+    padding-left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+.button input:hover {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+
+form .sign_up {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.sign_up a {
+    color: #be2edd;
+}
+
+form a {
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}

@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-<p>Registration successful!</p>
-<p>You can now <a href="login.jsp">log in</a> to continue</p>
+<h1>Registration successful!</h1>
+<p>You can now <a href="login.jsp">log in</a> to continue.</p>
 </body>
 </html>

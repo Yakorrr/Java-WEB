@@ -123,7 +123,7 @@ form input[type="radio"] {
 
 form .button {
     height: 45px;
-    margin: 35px 0
+    margin: 35px 0 25px;
 }
 
 form .button input {
@@ -142,6 +142,30 @@ form .button input {
 
 form .button input:hover {
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+}
+
+form .sign-in {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.sign-in a {
+    color: #be2edd;
+}
+
+form a {
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+.check-gender {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: red;
 }
 
 .datepicker {

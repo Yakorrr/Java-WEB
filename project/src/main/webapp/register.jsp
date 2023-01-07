@@ -1,8 +1,10 @@
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Responsive Registration Form | CodingLab </title>
+    <title>Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -17,13 +19,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/register.css">
 </head>
 <body>
 <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-        <form action="#">
+        <form action="RegistrationServlet" method="post" novalidate>
             <div class="user-details">
                 <div class="input-box">
                     <label class="details" for="first-name">First Name</label>
@@ -66,9 +68,9 @@
             </div>
 
             <div class="gender-details">
-                <input type="radio" name="gender" id="dot-1" required>
-                <input type="radio" name="gender" id="dot-2" required>
-                <input type="radio" name="gender" id="dot-3" required>
+                <input type="radio" class="gender-radio" name="gender" id="dot-1" required>
+                <input type="radio" class="gender-radio" name="gender" id="dot-2" required>
+                <input type="radio" class="gender-radio" name="gender" id="dot-3" required>
                 <span class="gender-title">Gender</span>
                 <div class="category">
                     <label for="dot-1">
@@ -85,8 +87,17 @@
                     </label>
                 </div>
             </div>
+
+            <div class="check-gender">
+                <%--                <span><%= request.getAttribute("errMessage") %></span>--%>
+                <span>yfyufviylb;ou</span>
+            </div>
+
             <div class="button">
-                <input type="submit" value="Register">
+                <input class="submit" type="submit" value="Register">
+            </div>
+            <div class="sign-in">
+                Already have an account? <a href="login.jsp">Sign in now</a>
             </div>
         </form>
     </div>
@@ -106,6 +117,17 @@
             $("#first-name").focus();
         });
     });
+
+    // $(".submit").click(function () {
+    //     if ($(".gender-radio").not(':checked')) {
+    //         $(".check-gender").css({
+    //             "display": "flex",
+    //             "justify-content": "center",
+    //             "width": "100%",
+    //             "color": "red"
+    //         });
+    //     }
+    // });
 </script>
 
 </body>
