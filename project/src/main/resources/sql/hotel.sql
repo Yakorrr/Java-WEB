@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`users` (
   `email` VARCHAR(100) NOT NULL,
   `language` VARCHAR(55) DEFAULT '' NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idusers_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX idUsers_UNIQUE (`id` ASC) VISIBLE,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`requests` (
   `end_date` DATE NOT NULL,
   `isApproved` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idrequests_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX idRequests_UNIQUE (`id` ASC) VISIBLE,
   INDEX `fk_requests_users2_idx` (`users_id` ASC) VISIBLE,
   CONSTRAINT `fk_requests_users2`
     FOREIGN KEY (`users_id`)
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`rooms` (
   `picURL` VARCHAR(200) NOT NULL,
   `price` DECIMAL(13,2) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idrooms_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX idRooms_UNIQUE (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `hotel`.`bills` (
   `requests_id` INT NOT NULL,
   `rooms_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idbills_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX idBills_UNIQUE (`id` ASC) VISIBLE,
   INDEX `fk_bills_requests1_idx` (`requests_id` ASC) VISIBLE,
   UNIQUE INDEX `requests_id_UNIQUE` (`requests_id` ASC) VISIBLE,
   INDEX `fk_bills_rooms2_idx` (`rooms_id` ASC) VISIBLE,
@@ -96,5 +96,5 @@ CREATE TABLE IF NOT EXISTS `hotel`.`bills` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO `hotel`.`users` (`name`, `role`, `pass_encoded`, `email`) VALUES ('user', 'USER', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'user@user.com');
-INSERT INTO `hotel`.`users` (`name`, `role`, `pass_encoded`, `email`) VALUES ('admin', 'ADMIN', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ad@ad.com');
+INSERT INTO `hotel`.`users` (`name`, `role`, `pass_encoded`, `email`, `language`) VALUES ('user', 'USER', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'user@user.com', 'en');
+INSERT INTO `hotel`.`users` (`name`, `role`, `pass_encoded`, `email`, `language`) VALUES ('admin', 'ADMIN', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'ad@ad.com', 'en');

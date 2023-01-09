@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class JDBCVars {
     private static final Logger logger = Logger.getLogger(JDBCVars.class);
 
-    private static final String jdbcURL = "jdbc:mysql://localhost:3306/hotel?useSSL=false";
+    private static final String jdbcURL = "jdbc:mysql://localhost:3306/hotel?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "ba3h!UN6A6M#@6k";
 
@@ -18,9 +18,7 @@ public class JDBCVars {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Got Connection");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-            System.out.println("Connected");
         } catch (ClassNotFoundException | SQLException e) {
             logger.error(e.getMessage());
         }
@@ -30,9 +28,7 @@ public class JDBCVars {
         return connection;
     }
 
-    public static boolean testConnection() {
-        return (getConnection() != null);
-    }
+    private JDBCVars() {
 
-    private JDBCVars() {}
+    }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 import static lab2.controller.dao.JDBCVars.getConnection;
 
-// Шаблонный метод
 public abstract class AbstractDAO<T> {
 
     abstract Logger getLogger();
@@ -33,7 +32,8 @@ public abstract class AbstractDAO<T> {
      * @param preparedStatement - statement to be modified
      * @param object            - object which fields will be inserted into the prepared statement
      */
-    abstract void setStatement(@NotNull PreparedStatement preparedStatement, @NotNull T object) throws SQLException, NotEnoughDataException;
+    abstract void setStatement(@NotNull PreparedStatement preparedStatement, @NotNull T object)
+            throws SQLException, NotEnoughDataException;
 
     /**
      * Inserts an ID into a prepared statement
@@ -41,7 +41,8 @@ public abstract class AbstractDAO<T> {
      * @param preparedStatement - statement to be modified
      * @param object            - object which id field will be inserted into the prepared statement
      */
-    abstract void setUpdateStatementId(@NotNull PreparedStatement preparedStatement, @NotNull T object) throws SQLException;
+    abstract void setUpdateStatementId(@NotNull PreparedStatement preparedStatement, @NotNull T object)
+            throws SQLException;
 
     /**
      * Gets values from result set and sets respective fields of an object
@@ -63,21 +64,22 @@ public abstract class AbstractDAO<T> {
     /**
      * Inserts object into a database
      *
-     * @param object - object to be inserted into database (object's id doesn't matter and is assigned automatically)
+     * @param object - object to be inserted into database
+     *               (object's id doesn't matter and is assigned automatically)
      */
     public void insert(@NotNull T object) {
         Logger logger = getLogger();
+
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getInsert())) {
-
+             PreparedStatement ps = connection.prepareStatement(getInsert())) {
             logger.info("Inserting into DB");
-            setStatement(preparedStatement, object);
-            logger.info("Executing statement: " + preparedStatement);
-            preparedStatement.executeUpdate();
-
+            setStatement(ps, object);
+            logger.info("Executing statement: " + ps);
+            ps.executeUpdate();
         } catch (SQLException | NotEnoughDataException e) {
             logger.error(e.getMessage());
         }
+
         logger.info("Insert: success");
     }
 
@@ -85,17 +87,18 @@ public abstract class AbstractDAO<T> {
      * Selects and entry from database (hotel) by its id.
      *
      * @param id - entry id
-     * @return returns corresponding object from database (with all fields, including 'id'); if object wasn't found, returns NULL
+     * @return returns corresponding object from database
+     * (with all fields, including 'id'); if object wasn't found, returns NULL
      */
     public T selectById(int id) {
         Logger logger = getLogger();
         T object = null;
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getSelectById())) {
 
-            preparedStatement.setInt(1, id);
-            logger.info("Executing statement: " + preparedStatement);
-            ResultSet rs = preparedStatement.executeQuery();
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(getSelectById())) {
+            ps.setInt(1, id);
+            logger.info("Executing statement: " + ps);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 object = setObjectParams(rs);
@@ -104,39 +107,31 @@ public abstract class AbstractDAO<T> {
         } catch (SQLException e) {
             logger.error(e.getMessage());
         }
+
         logger.info("Select by id: success");
+
         return object;
     }
 
     /**
      * Selects all entries from database and returns in an ArrayList.
      *
-     * @return returns all objects from database in a list; if object wasn't found, returns an empty ArrayList
+     * @return returns all objects from database in a list;
+     * if object wasn't found, returns an empty ArrayList
      */
     public List<T> selectAll() {
         Logger logger = getLogger();
-        System.out.println("Get logger");
         List<T> objectList = new ArrayList<>();
 
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getSelectAll())) {
-
-            System.out.println("Executing statement");
-
-            logger.info("Executing statement: " + preparedStatement);
-            System.out.println("Statement executed");
-            ResultSet rs = preparedStatement.executeQuery();
-            System.out.println("Query done");
-
-            ResultSetMetaData mt = rs.getMetaData();
+             PreparedStatement ps = connection.prepareStatement(getSelectAll())) {
+            logger.info("Executing statement: " + ps);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 T object = setObjectParams(rs);
-                System.out.println("Set object params");
                 setObjectId(rs, object);
-                System.out.println("Set object id");
                 objectList.add(object);
-                System.out.println("Object list add");
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -156,14 +151,18 @@ public abstract class AbstractDAO<T> {
     public boolean delete(int id) {
         boolean rowDeleted = false;
         Logger logger = getLogger();
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(getDelete())) {
-            statement.setInt(1, id);
-            logger.info("Deleting DB entry: executing statement: " + statement);
-            rowDeleted = statement.executeUpdate() > 0;
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(getDelete())) {
+            ps.setInt(1, id);
+            logger.info("Deleting DB entry: executing statement: " + ps);
+            rowDeleted = ps.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error(e.getMessage());
         }
+
         logger.info("Deleting DB entry: success");
+
         return rowDeleted;
     }
 
@@ -176,18 +175,20 @@ public abstract class AbstractDAO<T> {
     public boolean update(@NotNull T object) {
         boolean rowUpdated = false;
         Logger logger = getLogger();
+
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getUpdate())) {
+             PreparedStatement ps = connection.prepareStatement(getUpdate())) {
+            setStatement(ps, object);
+            setUpdateStatementId(ps, object);
 
-            setStatement(preparedStatement, object);
-            setUpdateStatementId(preparedStatement, object);
-
-            logger.info("Executing statement: " + preparedStatement);
-            rowUpdated = preparedStatement.executeUpdate() > 0;
+            logger.info("Executing statement: " + ps);
+            rowUpdated = ps.executeUpdate() > 0;
         } catch (SQLException | NotEnoughDataException e) {
             logger.error(e.getMessage());
         }
+
         logger.info("Update: success");
+
         return rowUpdated;
     }
 
@@ -200,12 +201,12 @@ public abstract class AbstractDAO<T> {
     public int findId(@NotNull T object) {
         Logger logger = getLogger();
         int id = -1;
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(getFind())) {
 
-            setStatement(preparedStatement, object);
-            logger.info("Executing statement: " + preparedStatement);
-            ResultSet rs = preparedStatement.executeQuery();
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(getFind())) {
+            setStatement(ps, object);
+            logger.info("Executing statement: " + ps);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 id = rs.getInt("id");
@@ -213,7 +214,9 @@ public abstract class AbstractDAO<T> {
         } catch (SQLException | NotEnoughDataException e) {
             logger.error(e.getMessage());
         }
+
         logger.info("Select by id: success");
+
         return id;
     }
 }

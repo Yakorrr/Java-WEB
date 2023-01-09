@@ -1,10 +1,10 @@
 package lab2.controller.dao;
 
 import com.sun.istack.internal.NotNull;
-import org.apache.log4j.Logger;
 import lab2.model.enums.Language;
 import lab2.model.enums.Role;
 import lab2.model.pojo.User;
+import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +13,8 @@ import java.sql.SQLException;
 public class UserDAO extends AbstractDAO<User> {
     private static final Logger logger = Logger.getLogger(UserDAO.class);
 
-    private static final String INSERT = "INSERT INTO users" + "  (name, role, pass_encoded,  email, language) VALUES " +
+    private static final String INSERT = "INSERT INTO users" +
+            " (name, role, pass_encoded,  email, language) VALUES " +
             " (?, ?, ?, ?, ?);";
 
     private static final String SELECT_BY_ID = "SELECT id, name, role, pass_encoded, email, language FROM users " +
@@ -38,7 +39,7 @@ public class UserDAO extends AbstractDAO<User> {
         return SELECT_BY_ID;
     }
 
-    String getSelectAll() {
+    public String getSelectAll() {
         return SELECT_ALL;
     }
 

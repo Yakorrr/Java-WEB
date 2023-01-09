@@ -1,6 +1,5 @@
 package lab2.controller.servlets;
 
-import org.apache.log4j.Logger;
 import lab2.controller.dao.UserDAO;
 import lab2.controller.util.Localization;
 import lab2.controller.util.PasswordEncoder;
@@ -8,6 +7,7 @@ import lab2.controller.util.Paths;
 import lab2.controller.util.StringConverter;
 import lab2.model.enums.Role;
 import lab2.model.pojo.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -30,24 +29,17 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         String login = request.getParameter("email");
-        System.out.println("Login: " + login);
 
         try {
-            System.out.println("Login before: " + login);
             login = StringConverter.decodeParameter(login);
-            System.out.println("Login after: " + login);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
 
         String password = request.getParameter("password");
-        System.out.println("Password: " + password);
 
         UserDAO userDAO = new UserDAO();
         List<User> users = userDAO.selectAll();
-
-        System.out.println("Users: " + users);
-
         User u = null;
 
         for (User user : users) {
@@ -56,8 +48,6 @@ public class LoginServlet extends HttpServlet {
                 break;
             }
         }
-
-        System.out.println("User: " + Objects.requireNonNull(u));
 
         try {
             if (u == null) {
