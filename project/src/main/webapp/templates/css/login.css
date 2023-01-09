@@ -16,6 +16,25 @@ body {
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
+.lang-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-start;
+    width: 100%;
+    position: absolute;
+    padding: 5px;
+    z-index: 10;
+}
+
+.lang-bar a {
+    text-decoration: none;
+}
+
+.lang-bar a img {
+    width: 25px;
+    height: 25px;
+}
+
 .main_div {
     max-width: 500px;
     width: 50%;
@@ -126,7 +145,8 @@ form .input_box {
     transition: all 0.3s ease;
 }
 
-.input_box input:focus, .input_box input:valid {
+.input_box label input:focus,
+.input_box label input:valid {
     border-color: #9b59b6;
 }
 
@@ -194,4 +214,12 @@ form a {
 
 form a:hover {
     text-decoration: underline;
+}
+
+.check-input {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: red;
+    margin-top: 12px;
 }

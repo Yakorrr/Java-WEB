@@ -77,11 +77,6 @@ form .input-box label.details {
     border-color: #9b59b6;
 }
 
-.input-box:last-child {
-    display: block;
-    margin: auto;
-}
-
 form .gender-details .gender-title {
     font-size: 20px;
     font-weight: 500;
@@ -89,7 +84,7 @@ form .gender-details .gender-title {
 
 form .category {
     display: flex;
-    width: 80%;
+    width: 100%;
     margin: 14px auto;
     justify-content: space-between;
 }
@@ -123,7 +118,7 @@ form input[type="radio"] {
 
 form .button {
     height: 45px;
-    margin: 35px 0 25px;
+    margin: 25px 0 25px;
 }
 
 form .button input {
@@ -161,7 +156,7 @@ form a:hover {
     text-decoration: underline;
 }
 
-.check-gender {
+.check-input {
     display: flex;
     justify-content: center;
     width: 100%;
