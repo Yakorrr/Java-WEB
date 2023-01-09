@@ -7,10 +7,10 @@ import lab2.controller.util.Pagination;
 import lab2.controller.util.PasswordEncoder;
 import lab2.model.enums.Language;
 import lab2.model.enums.Role;
-import lab2.model.pojo.Bill;
-import lab2.model.pojo.Request;
-import lab2.model.pojo.Room;
-import lab2.model.pojo.User;
+import lab2.model.entities.Bill;
+import lab2.model.entities.Request;
+import lab2.model.entities.Room;
+import lab2.model.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,12 +45,24 @@ public class AdminServlet extends HttpServlet {
                 showAdminPage(request, response);
                 break;
             case "/admin-users-update":
-                String name = request.getParameter("name");
-                String password = PasswordEncoder.getSHA(request.getParameter("pass"));
+                String firstName = request.getParameter("first-name");
+                String lastName = request.getParameter("last-name");
+                String dateOfBirth = request.getParameter("date-of-birth");
+                String gender = request.getParameter("gender");
+                String telephoneNumber = request.getParameter("telephone-number");
+                String email = request.getParameter("email");
                 Role role = Role.valueOf(request.getParameter("role"));
-                String email = request.getParameter("mail");
-                Language lang = Language.valueOf(request.getParameter("lang"));
-                new UserDAO().insert(new User(name, role, password, email, lang));
+                Language language = Language.valueOf(request.getParameter("lang"));
+                String password = PasswordEncoder.getSHA(request.getParameter("password"));
+//                String confirmPassword = request.getParameter("confirm-password");
+
+//                String name = request.getParameter("name");
+//                String password = PasswordEncoder.getSHA(request.getParameter("pass"));
+//                Role role = Role.valueOf(request.getParameter("role"));
+//                String email = request.getParameter("mail");
+//                Language lang = Language.valueOf(request.getParameter("lang"));
+                new UserDAO().insert(new User(firstName, lastName, LocalDate.parse(dateOfBirth),
+                        gender, telephoneNumber, email, role, language, password));
                 showUserTable(request, response);
                 break;
             default:
@@ -70,8 +83,8 @@ public class AdminServlet extends HttpServlet {
                 processUserManagementPageRequest(request, response);
                 break;
             case "/admin-tables":
-                billPagination.paginate("-bills", new BillDAO().selectAll(), request, response);
-                roomPagination.paginate("-rooms", new RoomDAO().selectAll(), request, response);
+                billPagination.paginate("-bills", new BillDAO().selectAll(), request);
+                roomPagination.paginate("-rooms", new RoomDAO().selectAll(), request);
                 showNewForm(request, response, "tables.jsp");
                 break;
             case "/admin-stats":
@@ -95,7 +108,7 @@ public class AdminServlet extends HttpServlet {
                                         .filter(r -> !r.isApproved())
                                         .collect(Collectors.toList());
 
-        requestPagination.paginate(requests, request, response);
+        requestPagination.paginate(requests, request);
         showNewForm(request, response, "success_admin.jsp");
     }
 
@@ -154,7 +167,7 @@ public class AdminServlet extends HttpServlet {
     private void showUserTable(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
             throws ServletException, IOException {
         List<User> userList = new UserDAO().selectAll();
-        userPagination.paginate(userList, request, response);
+        userPagination.paginate(userList, request);
 
         showNewForm(request, response, "users_management.jsp");
     }

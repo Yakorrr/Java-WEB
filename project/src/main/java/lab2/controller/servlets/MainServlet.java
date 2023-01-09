@@ -2,7 +2,7 @@ package lab2.controller.servlets;
 
 import org.apache.log4j.Logger;
 import lab2.model.enums.Role;
-import lab2.model.pojo.User;
+import lab2.model.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +19,7 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Role role = null;
+
         try {
             HttpSession currentSession = request.getSession();
             User currentUser = (User) currentSession.getAttribute("user");
@@ -30,5 +31,5 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("currentRole", role);
         System.out.println("Entering MainServlet doGet method");
         request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+    }
 }

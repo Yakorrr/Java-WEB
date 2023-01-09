@@ -4,9 +4,9 @@ import com.sun.istack.internal.NotNull;
 import lab2.controller.dao.BillDAOProxy;
 import lab2.controller.dao.RequestDAO;
 import lab2.controller.util.Pagination;
-import lab2.model.pojo.Bill;
-import lab2.model.pojo.Request;
-import lab2.model.pojo.User;
+import lab2.model.entities.Bill;
+import lab2.model.entities.Request;
+import lab2.model.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +53,7 @@ public class UserRequestsServlet extends HttpServlet {
                                             .filter(r-> r.getUser().getId() == currentUser.getId())
                                             .collect(Collectors.toList());
 
-        pagination.paginate(requestsToDisplay, request, response);
+        pagination.paginate(requestsToDisplay, request);
         request.getRequestDispatcher("templates/user/user-requests.jsp").forward(request, response);
     }
 

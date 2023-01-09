@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isErrorPage="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,7 +27,7 @@
 </div>
 
 <div class="main_div">
-    <div class="title">Login</div>
+    <div class="title"><%=Localization.getString("login-form-title")%></div>
     <div class="social_icons">
         <a href="#"><i class="fab fa-google"></i><span>Google</span></a>
         <a href="#"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
@@ -59,11 +60,23 @@
             </div>
         </div>
 
+        <div class="check-input">
+                <span>
+                    <%
+                        String message = (String) request.getServletContext().getAttribute("errMessage");
+
+                        if (!Objects.equals(message, null)) {
+                            out.print(message);
+                        } else request.getServletContext().removeAttribute("errMessage");
+                    %>
+                </span>
+        </div>
+
         <div class="input_box button">
             <input type="submit" value="<%=Localization.getString("submit-value")%>">
         </div>
         <div class="sign_up">
-            Not a member? <a href="templates/register.jsp">Sign up now</a>
+            Not a member? <a href="<c:url value="/register"/>">Sign up now</a>
         </div>
     </form>
 </div>

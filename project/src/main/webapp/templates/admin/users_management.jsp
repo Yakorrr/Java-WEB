@@ -1,7 +1,7 @@
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.enums.Language" %>
 <%@ page import="lab2.model.enums.Role" %>
-<%@ page import="lab2.model.pojo.User" %>
+<%@ page import="lab2.model.entities.User" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8"%>

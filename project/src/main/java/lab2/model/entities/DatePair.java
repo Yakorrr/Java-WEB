@@ -1,4 +1,4 @@
-package lab2.model.pojo;
+package lab2.model.entities;
 
 import com.sun.istack.internal.NotNull;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import java.util.Objects;
 
 @Getter
 public class DatePair {
-    private Date startDate;
-    private Date endDate;
+    private final Date startDate;
+    private final Date endDate;
 
     public DatePair(@NotNull Date startDate, @NotNull Date endDate) {
         if (DateUtil.coherentDates(startDate, endDate)) {

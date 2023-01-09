@@ -5,16 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Pagination<T> {
-    @Getter @Setter private static int entriesPerPage = 3;
+    @Getter
+    @Setter
+    private static int entriesPerPage = 3;
 
     public int getNumberOfPages(@NotNull List<T> allEntries) {
-        Integer size = allEntries.size();
+        int size = allEntries.size();
         if (size == 0) {
             return 1;
         }
@@ -25,7 +26,7 @@ public class Pagination<T> {
         int startIndex = entriesPerPage * (pageNum - 1);
         int endIndex = startIndex + entriesPerPage - 1;
 
-        List<T> result = new ArrayList<T>();
+        List<T> result = new ArrayList<>();
         if (allEntries.size() < (startIndex + 1)) {
             return result;
         }
@@ -38,28 +39,29 @@ public class Pagination<T> {
         return result;
     }
 
-    public void paginate(String tag, @NotNull List<T> allEntries, @NotNull HttpServletRequest request, @NotNull HttpServletResponse response) {
+    public void paginate(String tag, @NotNull List<T> allEntries, @NotNull HttpServletRequest request) {
         String page = request.getParameter("page" + tag);
 
         int pageCount = getNumberOfPages(allEntries);
         request.setAttribute("page-count" + tag, pageCount);
 
-        
+
         int pageId = 1;
         try {
             pageId = Integer.parseInt(page);
-        } catch (Exception e) { }
+        } catch (Exception ignored) {
+        }
         request.setAttribute("entries" + tag, getEntries(allEntries, pageId));
         request.setAttribute("active-page" + tag, pageId);
     }
 
     /**
      * Sets a page count and page content (retrieves page number from GET request)
+     *
      * @param allEntries - list of all entries (from DAO)
-     * @param request - HttpServletRequest
-     * @param response - HttpServletResponse
+     * @param request    - HttpServletRequest
      */
-    public void paginate(@NotNull List<T> allEntries, @NotNull HttpServletRequest request, @NotNull HttpServletResponse response) {
+    public void paginate(@NotNull List<T> allEntries, @NotNull HttpServletRequest request) {
         String page = request.getParameter("page");
         int pageCount = getNumberOfPages(allEntries);
         request.setAttribute("page-count", pageCount);
@@ -67,7 +69,8 @@ public class Pagination<T> {
         int pageId = 1;
         try {
             pageId = Integer.parseInt(page);
-        } catch (Exception e) { }
+        } catch (Exception ignored) {
+        }
         request.setAttribute("entries", getEntries(allEntries, pageId));
         request.setAttribute("active-page", pageId);
     }

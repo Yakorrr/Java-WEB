@@ -6,7 +6,7 @@ import lab2.controller.util.PasswordEncoder;
 import lab2.controller.util.Paths;
 import lab2.controller.util.StringConverter;
 import lab2.model.enums.Role;
-import lab2.model.pojo.User;
+import lab2.model.entities.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -27,11 +28,12 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher(Paths.LOGIN.getUrl()).forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        String login = request.getParameter("email");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
 
         try {
-            login = StringConverter.decodeParameter(login);
+            email = StringConverter.decodeParameter(email);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -39,34 +41,48 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         UserDAO userDAO = new UserDAO();
-        List<User> users = userDAO.selectAll();
-        User u = null;
 
-        for (User user : users) {
-            if (user.getName().equals(login)) {
-                u = user;
-                break;
-            }
-        }
+        if (email.equals("")) {
+            request.getServletContext().setAttribute("errMessage", "Invalid Email!");
+            request.getRequestDispatcher("templates/login.jsp").forward(request, response);
+        } else if (password.equals("")) {
+            request.getServletContext().setAttribute("errMessage", "Invalid Password!");
+            request.getRequestDispatcher("templates/login.jsp").forward(request, response);
+        } else {
+            List<User> users = userDAO.selectAll();
+            User u = null;
 
-        try {
-            if (u == null) {
-                request.getRequestDispatcher("templates/user/no-user-found.jsp").forward(request, response);
-            } else if (u.getPasswordEncoded().equals(PasswordEncoder.getSHA(password))) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", u);
-                Localization.setCurrentLanguage(u.getLanguage());
-
-                if (u.getRole() == Role.USER) {
-                    request.getRequestDispatcher("templates/user/user-main.jsp").forward(request, response);
-                } else if (u.getRole() == Role.ADMIN) {
-                    request.getRequestDispatcher("admin").forward(request, response);
+            for (User user : users) {
+                if (user.getEmail().equals(email)) {
+                    u = user;
+                    break;
                 }
             }
 
-            request.getRequestDispatcher("templates/login.jsp").forward(request, response);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+            try {
+                if (u == null) {
+                    request.getServletContext().setAttribute("errMessage",
+                            "Incorrect data: user was not found!");
+                    request.getRequestDispatcher("templates/login.jsp").forward(request, response);
+                } else if (!Objects.requireNonNull(u)
+                        .getPasswordEncoded().equals(PasswordEncoder.getSHA(password))) {
+                    request.getServletContext().setAttribute("errMessage",
+                            "Incorrect password. Please try again!");
+                    request.getRequestDispatcher("templates/login.jsp").forward(request, response);
+                } else if (u.getPasswordEncoded().equals(PasswordEncoder.getSHA(password))) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", u);
+                    Localization.setCurrentLanguage(u.getLanguage());
+
+                    if (u.getRole() == Role.USER) {
+                        request.getRequestDispatcher("templates/user/user-main.jsp").forward(request, response);
+                    } else if (u.getRole() == Role.ADMIN) {
+                        request.getRequestDispatcher("admin").forward(request, response);
+                    }
+                }
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
         }
     }
 }

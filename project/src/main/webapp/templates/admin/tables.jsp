@@ -1,7 +1,7 @@
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.enums.RoomClass" %>
-<%@ page import="lab2.model.pojo.Bill" %>
-<%@ page import="lab2.model.pojo.Room" %>
+<%@ page import="lab2.model.entities.Bill" %>
+<%@ page import="lab2.model.entities.Room" %>
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.List" %>
 <%--

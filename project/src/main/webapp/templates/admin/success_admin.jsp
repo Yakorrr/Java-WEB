@@ -1,5 +1,5 @@
 <%@ page import="lab2.controller.util.Localization" %>
-<%@ page import="lab2.model.pojo.Request" %>
+<%@ page import="lab2.model.entities.Request" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>

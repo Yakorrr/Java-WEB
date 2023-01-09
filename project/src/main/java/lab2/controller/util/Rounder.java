@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Rounder {
-    private static final int			digitsAfterPoint = 2;
+    private static final int digitsAfterPoint = 2;
 
     public static double round(double price) {
         BigDecimal bd = new BigDecimal(Double.toString(price));
@@ -12,5 +12,6 @@ public class Rounder {
         return bd.doubleValue();
     }
 
-    private Rounder(){}
+    private Rounder() {
+    }
 }

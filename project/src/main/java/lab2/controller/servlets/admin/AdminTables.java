@@ -5,7 +5,7 @@ import lab2.controller.dao.BillDAO;
 import lab2.controller.dao.RoomDAO;
 import lab2.controller.util.Localization;
 import lab2.model.enums.RoomClass;
-import lab2.model.pojo.Room;
+import lab2.model.entities.Room;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

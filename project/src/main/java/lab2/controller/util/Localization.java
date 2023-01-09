@@ -11,20 +11,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Localization {
-    @Getter @Setter private static Language currentLanguage = Language.ua;
-    private static Locale engLocale = new Locale("en", "US");
-    private static Locale uaLocale = new Locale("ua", "UA");
-
-    public static ResourceBundle getCurrentBundle() {
-        ResourceBundle resourceBundle = null;
-        if (currentLanguage == Language.en) {
-            resourceBundle = ResourceBundle.getBundle("MessagesBundle_en_US", engLocale);
-        } else if (currentLanguage == Language.ua) {
-            resourceBundle = ResourceBundle.getBundle("MessagesBundle_ua_UA", uaLocale);
-        }
-
-        return resourceBundle;
-    }
+    @Getter
+    @Setter
+    private static Language currentLanguage = Language.ua;
+    private static final Locale engLocale = new Locale("en", "US");
+    private static final Locale uaLocale = new Locale("ua", "UA");
 
     public static String getString(@NotNull String tag) {
         return getStringByLang(tag, currentLanguage);
@@ -42,8 +33,9 @@ public class Localization {
 
     /**
      * Returns localized String by key and language from bundle.
-     * @param key
-     * @param language
+     *
+     * @param key      - key
+     * @param language - language
      * @return null if language is not supported by method
      */
     public static String getStringByLang(@NotNull String key, @NotNull Language language) {
@@ -67,5 +59,6 @@ public class Localization {
         }
     }
 
-    private Localization() {}
+    private Localization() {
+    }
 }

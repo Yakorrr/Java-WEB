@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 import lab2.controller.dao.RequestDAO;
 import lab2.model.enums.RoomClass;
 import lab2.model.exceptions.DateFormatException;
-import lab2.model.pojo.DatePair;
-import lab2.model.pojo.Request;
-import lab2.model.pojo.User;
+import lab2.model.entities.DatePair;
+import lab2.model.entities.Request;
+import lab2.model.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

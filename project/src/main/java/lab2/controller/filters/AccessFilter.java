@@ -2,7 +2,7 @@ package lab2.controller.filters;
 
 import com.sun.istack.internal.NotNull;
 import lab2.model.enums.Role;
-import lab2.model.pojo.User;
+import lab2.model.entities.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

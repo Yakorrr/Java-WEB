@@ -1,4 +1,4 @@
-package lab2.model.pojo;
+package lab2.model.entities;
 
 
 import lombok.AllArgsConstructor;
@@ -17,12 +17,21 @@ public class Room {
     private static final Logger logger = Logger.getLogger(Room.class);
 
 
-    @Getter @Setter private int                 id;
-    @Getter @Setter private int                 places;
-    @Getter         private RoomClass           roomClass;
-    @Getter @Setter private boolean             isOccupied;
-    @Getter         private String              picURL;
-    @Getter         private double              price;
+    @Getter
+    @Setter
+    private int id;
+    @Getter
+    @Setter
+    private int places;
+    @Getter
+    private RoomClass roomClass;
+    @Getter
+    @Setter
+    private boolean isOccupied;
+    @Getter
+    private String picURL;
+    @Getter
+    private double price;
 
     public Room(int places, RoomClass roomClass, boolean isOccupied, String picURL, double price) {
         this.places = places;

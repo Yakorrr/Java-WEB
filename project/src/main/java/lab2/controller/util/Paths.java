@@ -1,8 +1,5 @@
 package lab2.controller.util;
 
-//TODO: finish transferring addresses here
-//TODO: add servlet paths here
-
 public enum Paths {
     ACCESS_ERROR_PAGE("templates/no-rights.jsp"),
     GENERAL_ERROR("templates/general-error.jsp"),
@@ -12,7 +9,7 @@ public enum Paths {
     ADMIN_MAIN("templates/admin/success_admin.jsp"),
     USER_MAIN("templates/user/user-main.jsp");
 
-    private String url;
+    private final String url;
 
     Paths(String url) {
         this.url = url;

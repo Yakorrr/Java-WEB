@@ -3,7 +3,6 @@ package lab2.controller.util;
 import com.sun.istack.internal.NotNull;
 import org.apache.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class StringConverter {
         return result;
     }
 
-    public static String decodeParameter(@NotNull String parameter) throws UnsupportedEncodingException {
+    public static String decodeParameter(@NotNull String parameter) {
         return new String(parameter.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 

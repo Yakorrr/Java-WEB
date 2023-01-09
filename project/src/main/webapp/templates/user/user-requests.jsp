@@ -1,7 +1,7 @@
 <%@ page import="lab2.controller.dao.BillDAOProxy" %>
 <%@ page import="lab2.controller.util.Localization" %>
-<%@ page import="lab2.model.pojo.Bill" %>
-<%@ page import="lab2.model.pojo.Request" %>
+<%@ page import="lab2.model.entities.Bill" %>
+<%@ page import="lab2.model.entities.Request" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.

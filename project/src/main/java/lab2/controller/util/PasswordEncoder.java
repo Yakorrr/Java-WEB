@@ -10,6 +10,7 @@ public class PasswordEncoder {
 
     /**
      * Converts incoming string to SHA-256 string
+     *
      * @param input - string to be converted (e.g. password)
      * @return returns null if conversion fails;
      */
@@ -18,15 +19,13 @@ public class PasswordEncoder {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger no = new BigInteger(1, messageDigest);
-            String hashtext = no.toString(16);
+            StringBuilder hashText = new StringBuilder(no.toString(16));
 
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
+            while (hashText.length() < 32) {
+                hashText.insert(0, "0");
             }
-            return hashtext;
-        }
-
-        catch (NoSuchAlgorithmException e) {
+            return hashText.toString();
+        } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown"
                     + " for incorrect algorithm: " + e);
 
@@ -34,5 +33,6 @@ public class PasswordEncoder {
         }
     }
 
-    private PasswordEncoder(){}
+    private PasswordEncoder() {
+    }
 }

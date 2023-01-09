@@ -6,9 +6,9 @@ import lab2.controller.dao.BillDAO;
 import lab2.controller.dao.RequestDAO;
 import lab2.controller.dao.RoomDAO;
 import lab2.controller.util.Pagination;
-import lab2.model.pojo.Bill;
-import lab2.model.pojo.Request;
-import lab2.model.pojo.Room;
+import lab2.model.entities.Bill;
+import lab2.model.entities.Request;
+import lab2.model.entities.Room;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -41,7 +41,7 @@ public class ApproveServlet extends HttpServlet {
         List<Room> matchingRooms = findMatchingRooms(selected);
 
         Pagination<Room> roomPagination = new Pagination<>();
-        roomPagination.paginate(matchingRooms, request, response);
+        roomPagination.paginate(matchingRooms, request);
         request.getRequestDispatcher("templates/admin/approve-request.jsp").forward(request, response);
         return;
     }

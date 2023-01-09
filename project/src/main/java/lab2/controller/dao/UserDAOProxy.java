@@ -4,7 +4,7 @@ package lab2.controller.dao;
 import com.sun.istack.internal.NotNull;
 import org.apache.log4j.Logger;
 import lab2.model.enums.Role;
-import lab2.model.pojo.User;
+import lab2.model.entities.User;
 
 import java.util.Optional;
 

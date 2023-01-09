@@ -3,7 +3,7 @@ package lab2.controller.dao;
 import com.sun.istack.internal.NotNull;
 import org.apache.log4j.Logger;
 import lab2.model.enums.RoomClass;
-import lab2.model.pojo.Room;
+import lab2.model.entities.Room;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +12,8 @@ import java.sql.SQLException;
 public class RoomDAO extends AbstractDAO<Room> {
     private static final Logger logger = Logger.getLogger(RoomDAO.class);
 
-    private static final String INSERT = "INSERT INTO rooms" + "  (places, class, isOccupied,  picURL, price) VALUES " +
+    private static final String INSERT = "INSERT INTO rooms" +
+            " (places, class, isOccupied, picURL, price) VALUES " +
             " (?, ?, ?, ?, ?);";
 
     private static final String SELECT_BY_ID = "SELECT id, places, class, isOccupied, picURL, price FROM rooms " +
@@ -67,6 +68,7 @@ public class RoomDAO extends AbstractDAO<Room> {
         object.setOccupied(isOccupied);
         object.setPicURL(picURL);
         object.setPrice(price);
+
         return object;
     }
 

@@ -1,5 +1,5 @@
 <%@ page import="lab2.controller.util.Localization" %>
-<%@ page import="lab2.model.pojo.Bill" %>
+<%@ page import="lab2.model.entities.Bill" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.

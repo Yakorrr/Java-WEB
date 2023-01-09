@@ -4,8 +4,8 @@ import com.sun.istack.internal.NotNull;
 import org.apache.log4j.Logger;
 import lab2.controller.dao.BillDAOProxy;
 import lab2.controller.util.Pagination;
-import lab2.model.pojo.Bill;
-import lab2.model.pojo.User;
+import lab2.model.entities.Bill;
+import lab2.model.entities.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +56,7 @@ public class UserBillsServlet extends HttpServlet {
         List<Bill> billsToDisplay = billDAOProxy.selectAll().stream()
                                         .filter(b -> b.getRequest().getUser().getId() == currentUser.getId())
                                         .collect(Collectors.toList());
-        pagination.paginate(billsToDisplay, request, response);
+        pagination.paginate(billsToDisplay, request);
         request.getRequestDispatcher("templates/user/user-bills.jsp").forward(request, response);
     }
 

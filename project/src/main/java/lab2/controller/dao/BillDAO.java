@@ -2,7 +2,7 @@ package lab2.controller.dao;
 
 import com.sun.istack.internal.NotNull;
 import org.apache.log4j.Logger;
-import lab2.model.pojo.Bill;
+import lab2.model.entities.Bill;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,18 +11,19 @@ import java.sql.SQLException;
 public class BillDAO extends AbstractDAO<Bill> {
     private static final Logger logger = Logger.getLogger(BillDAO.class);
 
-    private static final String INSERT = "INSERT INTO bills" + "  (sum, isPaid, requests_id, rooms_id) VALUES " +
+    private static final String INSERT = "INSERT INTO bills" +
+            " (sum, isPaid, request_id, room_id) VALUES " +
             " (?, ?, ?, ?);";
 
     private static final String SELECT_BY_ID = "SELECT * FROM bills " +
             "WHERE id = ?;";
     private static final String SELECT_ALL = "SELECT * FROM bills;";
     private static final String DELETE = "DELETE FROM bills WHERE id = ?;";
-    private static final String UPDATE = "UPDATE bills SET sum=?, isPaid=?, requests_id=?, rooms_id=? " +
+    private static final String UPDATE = "UPDATE bills SET sum=?, isPaid=?, request_id=?, room_id=? " +
             "WHERE id = ?;";
 
     private static final String FIND = "SELECT id FROM bills " +
-            "WHERE (sum=? AND isPaid=? AND requests_id=? AND  rooms_id=? );";
+            "WHERE (sum=? AND isPaid=? AND request_id=? AND room_id=? );";
 
 
     Logger getLogger() { return logger; }

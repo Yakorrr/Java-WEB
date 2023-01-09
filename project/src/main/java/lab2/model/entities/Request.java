@@ -1,4 +1,4 @@
-package lab2.model.pojo;
+package lab2.model.entities;
 
 import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
@@ -18,14 +18,23 @@ import java.util.Objects;
 public class Request {
     private static final Logger logger = Logger.getLogger(Request.class);
 
-    @Getter @Setter private int                 id;
-    @Getter         private User                user;
-    @Getter         private int                 places;
-    @Getter         private RoomClass           roomClass;
-    @Getter         private DatePair            datePair;
-    @Getter @Setter private boolean             isApproved;
+    @Getter
+    @Setter
+    private int id;
+    @Getter
+    private User user;
+    @Getter
+    private int places;
+    @Getter
+    private RoomClass roomClass;
+    @Getter
+    private DatePair datePair;
+    @Getter
+    @Setter
+    private boolean isApproved;
 
-    public Request(@NotNull User user, int places, @NotNull RoomClass roomClass, @NotNull DatePair datePair, boolean isApproved) {
+    public Request(@NotNull User user, int places, @NotNull RoomClass roomClass,
+                   @NotNull DatePair datePair, boolean isApproved) {
         setUser(user);
         setPlaces(places);
         setRoomClass(roomClass);
@@ -39,18 +48,16 @@ public class Request {
         this.datePair = datePair;
     }
 
-    //Шаблон Делегат?
     public Date getStartDate() {
-        return  datePair == null? null : this.datePair.getStartDate();
+        return datePair == null ? null : this.datePair.getStartDate();
     }
 
-    //Шаблон Делегат?
     public Date getEndDate() {
-        return  datePair == null? null : this.datePair.getEndDate();
+        return datePair == null ? null : this.datePair.getEndDate();
     }
 
     public void setUser(@NotNull User user) {
-            this.user = user;
+        this.user = user;
     }
 
     public void setRoomClass(@NotNull RoomClass roomClass) {

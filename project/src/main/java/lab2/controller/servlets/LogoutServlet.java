@@ -16,12 +16,12 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html ; charset=UTF-8");
-
+        response.setContentType("text/html; charset=UTF-8");
         request.getRequestDispatcher("/").include(request, response);
 
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         session.invalidate();
+
         logger.info("Session invalidated successfully.");
         logger.info("User logged out successfully.");
     }
