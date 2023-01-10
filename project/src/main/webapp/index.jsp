@@ -12,15 +12,17 @@
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="templates/css/style.css">
+    <link rel="stylesheet" href="/templates/css/style.css">
 </head>
 <body class="body-main">
 
 <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-light">
-        <a class="p-2 link-dark" href="<c:url value="/login"/>"><%=Localization.getString("submit-value")%>
+        <a class="p-2 link-dark" href="/login">
+            <%=Localization.getString("submit-value")%>
         </a>
-        <a class="p-2 link-dark" href="<c:url value="/register"/>"><%=Localization.getString("register-link-text")%>
+        <a class="p-2 link-dark" href="/register">
+            <%=Localization.getString("register-link-text")%>
         </a>
     </div>
 </div>
@@ -36,10 +38,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="<c:url value="/main?lang=ua"/>">
+        <a href="/main?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="<c:url value="/main?lang=en"/>">
+        <a href="/main?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -51,6 +53,8 @@
         <%=Localization.getString("welcome-message2")%> 🏨</h1>
 </div>
 <div class="br-line"></div>
-<img class="index-image" src="templates/img/hotel/hotel.jpg" alt="hotel image">
+<img class="index-image"
+     src="/templates/img/hotel/hotel.jpg"
+     alt="hotel image">
 </body>
 </html>

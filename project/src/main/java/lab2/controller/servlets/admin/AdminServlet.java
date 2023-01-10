@@ -107,9 +107,6 @@ public class AdminServlet extends HttpServlet {
 
     private void forwardToServlet(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
             throws ServletException, IOException {
-//        ServletContext servletContext = getServletContext();
-//        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/approve");
-//        requestDispatcher.forward(request, response);
         request.getRequestDispatcher("/approve").forward(request, response);
     }
 

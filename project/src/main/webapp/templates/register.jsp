@@ -30,10 +30,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="<c:url value="/register?lang=ua"/>">
+        <a href="/register?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua-flag">
         </a>
-        <a href="<c:url value="/register?lang=en"/>">
+        <a href="/register?lang=en">
             <img src="templates/img/us-01.png" alt="us-flag">
         </a>
     </div>
@@ -150,7 +150,7 @@
             </div>
             <div class="sign-in">
                 <%=Localization.getString("sign-in-text")%>
-                <a href="<c:url value="/login"/>">
+                <a href="/login">
                     <%=Localization.getString("sign-in-link")%>
                 </a>
             </div>

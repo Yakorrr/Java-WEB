@@ -17,10 +17,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="<c:url value="/login?lang=ua"/>">
+        <a href="/login?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua-flag">
         </a>
-        <a href="<c:url value="/login?lang=en"/>">
+        <a href="/login?lang=en">
             <img src="templates/img/us-01.png" alt="us-flag">
         </a>
     </div>
@@ -78,7 +78,7 @@
             <input type="submit" value="<%=Localization.getString("submit-value")%>">
         </div>
         <div class="sign_up"><%=Localization.getString("sign-up-text")%>
-            <a href="<c:url value="/register"/>">
+            <a href="/register">
                 <%=Localization.getString("sign-up-link")%>
             </a>
         </div>

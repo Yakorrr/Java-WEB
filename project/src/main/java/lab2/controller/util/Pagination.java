@@ -71,6 +71,7 @@ public class Pagination<T> {
      */
     public void paginate(@NotNull List<T> allEntries, @NotNull HttpServletRequest request) {
         String page = request.getParameter("page");
+
         int pageCount = getNumberOfPages(allEntries);
         request.setAttribute("page-count", pageCount);
 
@@ -81,6 +82,7 @@ public class Pagination<T> {
         } catch (Exception e) {
             System.out.println("Invalid page!");
         }
+
         request.setAttribute("entries", getEntries(allEntries, pageId));
         request.setAttribute("active-page", pageId);
     }

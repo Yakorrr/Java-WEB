@@ -24,7 +24,7 @@ public class UserRequestsServlet extends HttpServlet {
     private final Pagination<Request> pagination = new Pagination<>();
 
     /**
-     * Deletes request from database, even if related bill exists and was payed.
+     * Deletes request from database, even if related bill exists and was paid.
      * If the bill exists, deletes it too.
      *
      * @param id - id of the request to be deleted
