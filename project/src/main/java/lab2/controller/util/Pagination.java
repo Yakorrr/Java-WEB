@@ -16,9 +16,11 @@ public class Pagination<T> {
 
     public int getNumberOfPages(@NotNull List<T> allEntries) {
         int size = allEntries.size();
+
         if (size == 0) {
             return 1;
         }
+
         return (size / entriesPerPage) + (size % entriesPerPage == 0 ? 0 : 1);
     }
 
@@ -27,15 +29,19 @@ public class Pagination<T> {
         int endIndex = startIndex + entriesPerPage - 1;
 
         List<T> result = new ArrayList<>();
+
         if (allEntries.size() < (startIndex + 1)) {
             return result;
         }
+
         if ((endIndex + 1) > allEntries.size()) {
             endIndex = allEntries.size() - 1;
         }
+
         for (int i = startIndex; i <= endIndex; i++) {
             result.add(allEntries.get(i));
         }
+
         return result;
     }
 
@@ -45,12 +51,14 @@ public class Pagination<T> {
         int pageCount = getNumberOfPages(allEntries);
         request.setAttribute("page-count" + tag, pageCount);
 
-
         int pageId = 1;
+
         try {
             pageId = Integer.parseInt(page);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.out.println("Invalid page!");
         }
+
         request.setAttribute("entries" + tag, getEntries(allEntries, pageId));
         request.setAttribute("active-page" + tag, pageId);
     }
@@ -67,9 +75,11 @@ public class Pagination<T> {
         request.setAttribute("page-count", pageCount);
 
         int pageId = 1;
+
         try {
             pageId = Integer.parseInt(page);
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.out.println("Invalid page!");
         }
         request.setAttribute("entries", getEntries(allEntries, pageId));
         request.setAttribute("active-page", pageId);

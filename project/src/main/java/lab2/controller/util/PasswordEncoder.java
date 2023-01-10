@@ -24,6 +24,7 @@ public class PasswordEncoder {
             while (hashText.length() < 32) {
                 hashText.insert(0, "0");
             }
+
             return hashText.toString();
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Exception thrown"

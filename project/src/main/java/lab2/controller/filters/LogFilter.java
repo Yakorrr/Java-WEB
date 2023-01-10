@@ -7,10 +7,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * TODO: log not working in filters?
- */
-
 @WebFilter("/*")
 public class LogFilter implements Filter {
     private static final Logger logger = Logger.getLogger(LogFilter.class);
@@ -22,13 +18,14 @@ public class LogFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        String servletPath = req.getServletPath();
+        String servletPath = request.getServletPath();
 
-        logger.info(" ServletPath :" + servletPath + ", URL =" + req.getRequestURL());
-        System.out.println(" ServletPath :" + servletPath + ", URL =" + req.getRequestURL());
+        logger.info("ServletPath: " + servletPath + ", URL = " + request.getRequestURL());
+//        System.out.println("ServletPath: " + servletPath + ", URL = " + req.getRequestURL());
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -12,10 +12,6 @@ import java.sql.SQLException;
 
 import static lab2.controller.dao.JDBCVars.getConnection;
 
-/**
- * TODO: all proxy - change to real DB requests
- * TODO: all proxy - write tests
- */
 public class BillDAOProxy extends BillDAO {
     private static final Logger logger = Logger.getLogger(BillDAOProxy.class);
 

@@ -25,5 +25,4 @@ public class LogoutServlet extends HttpServlet {
         logger.info("Session invalidated successfully.");
         logger.info("User logged out successfully.");
     }
-
 }

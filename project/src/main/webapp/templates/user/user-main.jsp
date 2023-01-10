@@ -35,9 +35,15 @@
     </a>
 </div>
 <br>
-<div>
-    <a href="<c:url value="/user-main?lang=ua"/>"><img width="25px" src="templates/img/ua-01.png" alt="ua"></a>
-    <a href="<c:url value="/user-main?lang=en"/>"><img width="25px" src="templates/img/us-01.png" alt="en"></a>
+<div class="lang-bar">
+    <div class="lang-bar-images">
+        <a href="<c:url value="/user-main?lang=ua"/>">
+            <img src="templates/img/ua-01.png" alt="ua">
+        </a>
+        <a href="<c:url value="/user-main?lang=en"/>">
+            <img src="templates/img/us-01.png" alt="en">
+        </a>
+    </div>
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

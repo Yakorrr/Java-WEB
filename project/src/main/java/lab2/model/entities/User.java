@@ -14,7 +14,6 @@ import java.util.Objects;
 public class User {
     private static final Logger logger = Logger.getLogger(Room.class);
 
-
     @Getter
     @Setter
     private int id;

@@ -16,11 +16,10 @@ import java.io.IOException;
 
 @WebServlet("/admin-update-rooms")
 public class AdminTables extends HttpServlet {
-    private static RoomDAO roomDAO = new RoomDAO();
+    private static final RoomDAO roomDAO = new RoomDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws IOException {
         String action = request.getServletPath();
 
         if ("/admin-update-rooms".equals(action)) {
@@ -51,7 +50,6 @@ public class AdminTables extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Localization.changeLocale(request);
         showNewForm(request, response);
     }

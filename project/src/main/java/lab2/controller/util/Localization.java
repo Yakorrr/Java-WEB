@@ -44,6 +44,7 @@ public class Localization {
         } else if (language == Language.ua) {
             return getUaString(key);
         }
+
         return null;
     }
 

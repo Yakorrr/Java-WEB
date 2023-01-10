@@ -22,19 +22,17 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @WebServlet(urlPatterns = {"/admin", "/admin-users", "/admin-tables", "/admin-update", "/admin-users-update"})
 public class AdminServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(AdminServlet.class);
 
-    private Pagination<Request> requestPagination = new Pagination<>();
-    private Pagination<User>    userPagination = new Pagination<>();
-    private Pagination<Room>    roomPagination = new Pagination<>();
-    private Pagination<Bill>    billPagination = new Pagination<>();
+    private final Pagination<Request> requestPagination = new Pagination<>();
+    private final Pagination<User> userPagination = new Pagination<>();
+    private final Pagination<Room> roomPagination = new Pagination<>();
+    private final Pagination<Bill> billPagination = new Pagination<>();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String action = request.getServletPath();
 
         switch (action) {
@@ -54,13 +52,7 @@ public class AdminServlet extends HttpServlet {
                 Role role = Role.valueOf(request.getParameter("role"));
                 Language language = Language.valueOf(request.getParameter("lang"));
                 String password = PasswordEncoder.getSHA(request.getParameter("password"));
-//                String confirmPassword = request.getParameter("confirm-password");
 
-//                String name = request.getParameter("name");
-//                String password = PasswordEncoder.getSHA(request.getParameter("pass"));
-//                Role role = Role.valueOf(request.getParameter("role"));
-//                String email = request.getParameter("mail");
-//                Language lang = Language.valueOf(request.getParameter("lang"));
                 new UserDAO().insert(new User(firstName, lastName, LocalDate.parse(dateOfBirth),
                         gender, telephoneNumber, email, role, language, password));
                 showUserTable(request, response);
@@ -96,23 +88,25 @@ public class AdminServlet extends HttpServlet {
         }
     }
 
-    private void showNewForm(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull String filename)
+    private void showNewForm(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response,
+                             @NotNull String filename)
             throws ServletException, IOException {
         String templatePath = "templates/admin/";
         request.getRequestDispatcher(templatePath + filename).forward(request, response);
     }
 
-    private void showAdminPage(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws ServletException, IOException {
-
+    private void showAdminPage(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
+            throws ServletException, IOException {
         List<Request> requests = new RequestDAO().selectAll().stream()
-                                        .filter(r -> !r.isApproved())
-                                        .collect(Collectors.toList());
+                .filter(r -> !r.isApproved())
+                .collect(Collectors.toList());
 
         requestPagination.paginate(requests, request);
         showNewForm(request, response, "success_admin.jsp");
     }
 
-    private void forwardToServlet(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws ServletException, IOException {
+    private void forwardToServlet(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
+            throws ServletException, IOException {
 //        ServletContext servletContext = getServletContext();
 //        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/approve");
 //        requestDispatcher.forward(request, response);
@@ -120,12 +114,12 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void processAdminRequest(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         String method = request.getParameter("method");
         String id = request.getParameter("id");
         boolean invalid = false;
 
-        if(method != null && id != null && method.equals("approve")) {
+        if (method != null && id != null && method.equals("approve")) {
             try {
                 int num = Integer.parseInt(id);
                 request.setAttribute("req-id", num);
@@ -134,33 +128,37 @@ public class AdminServlet extends HttpServlet {
                 invalid = true;
                 logger.error(e.getMessage());
             }
+
             if (!invalid) {
                 return;
             }
 
         }
+
         showAdminPage(request, response);
     }
 
-    private void processUserManagementPageRequest(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
-            throws ServletException, IOException{
+    private void processUserManagementPageRequest(@NotNull HttpServletRequest request,
+                                                  @NotNull HttpServletResponse response)
+            throws ServletException, IOException {
         String method = request.getParameter("method");
         String id = request.getParameter("id");
         UserDAOProxy proxyDao = new UserDAOProxy();
 
-        if(method != null && id != null) {
+        if (method != null && id != null) {
             switch (method) {
                 case "remove":
                     proxyDao.delete(id);
                     break;
-                case "priviledge_a":
+                case "privilege_a":
                     proxyDao.toAdmin(id);
                     break;
-                case "priviledge_u":
+                case "privilege_u":
                     proxyDao.toUser(id);
                     break;
             }
         }
+
         showUserTable(request, response);
     }
 

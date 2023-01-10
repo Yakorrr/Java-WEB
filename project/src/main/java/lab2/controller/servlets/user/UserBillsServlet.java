@@ -19,18 +19,21 @@ import java.util.stream.Collectors;
 
 @WebServlet("/user-my-bills")
 public class UserBillsServlet extends HttpServlet {
-    private BillDAOProxy billDAOProxy = new BillDAOProxy();
-    private Pagination<Bill> pagination = new Pagination<>();
-    private static Logger logger = Logger.getLogger("UserBillsServlet");
+    private final BillDAOProxy billDAOProxy = new BillDAOProxy();
+    private final Pagination<Bill> pagination = new Pagination<>();
+    private static final Logger logger = Logger.getLogger("UserBillsServlet");
 
     private void payTheBill(@NotNull Integer id, @NotNull HttpServletRequest request) {
         HttpSession session = request.getSession();
+
         if (session == null || session.getAttribute("user") == null) {
             logger.error("Unauthorized payment: impossible to pay the bill");
             return;
         }
-        User u = (User)session.getAttribute("user");
+
+        User u = (User) session.getAttribute("user");
         User billUser = billDAOProxy.findBillUser(id);
+
         if (billUser.equals(u)) {
             Bill toPay = billDAOProxy.selectById(id);
             toPay.setPaid(true);
@@ -54,8 +57,8 @@ public class UserBillsServlet extends HttpServlet {
 
         User currentUser = (User) request.getSession().getAttribute("user");
         List<Bill> billsToDisplay = billDAOProxy.selectAll().stream()
-                                        .filter(b -> b.getRequest().getUser().getId() == currentUser.getId())
-                                        .collect(Collectors.toList());
+                .filter(b -> b.getRequest().getUser().getId() == currentUser.getId())
+                .collect(Collectors.toList());
         pagination.paginate(billsToDisplay, request);
         request.getRequestDispatcher("templates/user/user-bills.jsp").forward(request, response);
     }

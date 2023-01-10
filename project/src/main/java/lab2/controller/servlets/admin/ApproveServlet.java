@@ -22,14 +22,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @WebServlet("/approve")
 public class ApproveServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ApproveServlet.class);
 
-    private static RequestDAO requestDAO = new RequestDAO();
-    private static RoomDAO roomDAO = new RoomDAO();
-    private static BillDAO billDAO = new BillDAO();
+    private static final RequestDAO requestDAO = new RequestDAO();
+    private static final RoomDAO roomDAO = new RoomDAO();
+    private static final BillDAO billDAO = new BillDAO();
 
     private void showApprovePage(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,25 +42,25 @@ public class ApproveServlet extends HttpServlet {
         Pagination<Room> roomPagination = new Pagination<>();
         roomPagination.paginate(matchingRooms, request);
         request.getRequestDispatcher("templates/admin/approve-request.jsp").forward(request, response);
-        return;
     }
 
     private List<Room> findMatchingRooms(@NotNull Request selected) {
-            List<Room> matching = new ArrayList<>();
+        List<Room> matching = new ArrayList<>();
 
-            List<Room> allRooms = roomDAO.selectAll();
+        List<Room> allRooms = roomDAO.selectAll();
 
-            for (Room r : allRooms) {
-                if (r.getRoomClass() == selected.getRoomClass()) {
-                    if (r.getPlaces() >= selected.getPlaces()) {
-                        if (withinDateRange(r, selected)) {
-                            matching.add(r);
-                        }
+        for (Room r : allRooms) {
+            if (r.getRoomClass() == selected.getRoomClass()) {
+                if (r.getPlaces() >= selected.getPlaces()) {
+                    if (withinDateRange(r, selected)) {
+                        matching.add(r);
                     }
                 }
-
             }
-            return matching;
+
+        }
+
+        return matching;
     }
 
     private boolean withinDateRange(@NotNull Room r, @NotNull Request selected) {
@@ -74,6 +73,7 @@ public class ApproveServlet extends HttpServlet {
                 }
             }
         }
+
         return true;
     }
 
@@ -92,7 +92,7 @@ public class ApproveServlet extends HttpServlet {
         String method = request.getParameter("method");
         String id = request.getParameter("id");
 
-        if(method != null && id != null && method.equals("approve")) {
+        if (method != null && id != null && method.equals("approve")) {
             try {
                 int num = Integer.parseInt(id);
                 request.setAttribute("req-id", num);
@@ -101,6 +101,7 @@ public class ApproveServlet extends HttpServlet {
             } catch (NumberFormatException e) {
                 logger.error(e.getMessage());
             }
+
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/admin");
             rd.forward(request, response);
@@ -125,8 +126,9 @@ public class ApproveServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println("Error making approving request");
         }
-        ServletContext context= getServletContext();
-        RequestDispatcher rd= context.getRequestDispatcher("/admin");
+
+        ServletContext context = getServletContext();
+        RequestDispatcher rd = context.getRequestDispatcher("/admin");
         rd.forward(request, response);
     }
 }

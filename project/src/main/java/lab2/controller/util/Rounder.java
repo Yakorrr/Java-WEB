@@ -9,6 +9,7 @@ public class Rounder {
     public static double round(double price) {
         BigDecimal bd = new BigDecimal(Double.toString(price));
         bd = bd.setScale(digitsAfterPoint, RoundingMode.HALF_UP);
+
         return bd.doubleValue();
     }
 

@@ -22,11 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/user-main","/new-request"})
+@WebServlet(urlPatterns = {"/user-main", "/new-request"})
 public class UserMainServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(UserMainServlet.class);
-    private static RequestDAO requestDAO = new RequestDAO();
-
+    private static final RequestDAO requestDAO = new RequestDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,7 +43,6 @@ public class UserMainServlet extends HttpServlet {
                 makeNewRequest(request);
                 request.getRequestDispatcher("/user-main").forward(request, response);
         }
-
     }
 
     private void makeNewRequest(@NotNull HttpServletRequest request) {
@@ -53,10 +51,10 @@ public class UserMainServlet extends HttpServlet {
         try {
             int places = Integer.parseInt(request.getParameter("places"));
             RoomClass roomClass = RoomClass.valueOf(request.getParameter("class"));
-            List<Date> dates = parseDates(request.getParameter("daterange"));
+            List<Date> dates = parseDates(request.getParameter("date-range"));
             System.out.println("Dates: " + dates);
 
-            Request newRequest = new Request((User)request.getSession().getAttribute("user"),
+            Request newRequest = new Request((User) request.getSession().getAttribute("user"),
                     places,
                     roomClass,
                     new DatePair(dates.get(0), dates.get(1)),
@@ -67,18 +65,20 @@ public class UserMainServlet extends HttpServlet {
         }
     }
 
-    private List<Date> parseDates(@NotNull String daterange) throws DateFormatException, ParseException {
+    private List<Date> parseDates(@NotNull String dateRange) throws DateFormatException, ParseException {
         List<Date> result = new ArrayList<>();
-        String[] dates = daterange.split(" - ");
+        String[] dates = dateRange.split(" - ");
 
         if (dates.length != 2) {
-            throw new DateFormatException("Error parsind date string: " + daterange);
+            throw new DateFormatException("Error parsing date string: " + dateRange);
         }
-        DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
         for (String s : dates) {
             result.add(new Date(df.parse(s).getTime()));
         }
+
         return result;
     }
 }

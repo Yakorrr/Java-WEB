@@ -13,7 +13,6 @@ import java.util.Objects;
 public class Bill {
     private static final Logger logger = Logger.getLogger(Bill.class);
 
-
     @Getter
     @Setter
     private int id;
@@ -40,6 +39,7 @@ public class Bill {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be less than zero: id value is " + id);
         }
+
         this.id = id;
         setSum(sum);
         this.isPaid = isPaid;
@@ -51,6 +51,7 @@ public class Bill {
 
     public void setSum(double sum) {
         this.sum = Rounder.round(sum);
+
         logger.info("Double value of 'sum' field set succesfully: " + this.sum);
     }
 
@@ -63,10 +64,12 @@ public class Bill {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bill bill = (Bill) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Bill bill = (Bill) obj;
+
         return id == bill.id &&
                 Double.compare(bill.sum, sum) == 0 &&
                 isPaid == bill.isPaid &&

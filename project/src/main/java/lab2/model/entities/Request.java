@@ -11,8 +11,6 @@ import lab2.model.enums.RoomClass;
 import java.sql.Date;
 import java.util.Objects;
 
-// TODO: Finish adding @NotNull
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class Request {
@@ -73,10 +71,12 @@ public class Request {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request request = (Request) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Request request = (Request) obj;
+
         return id == request.id &&
                 places == request.places &&
                 isApproved == request.isApproved &&

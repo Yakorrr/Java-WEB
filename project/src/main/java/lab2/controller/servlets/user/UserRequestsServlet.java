@@ -19,22 +19,24 @@ import java.util.stream.Collectors;
 
 @WebServlet("/user-my-requests")
 public class UserRequestsServlet extends HttpServlet {
-    private RequestDAO requestDAO = new RequestDAO();
-    private BillDAOProxy billDAOProxy = new BillDAOProxy();
-    private Pagination<Request> pagination = new Pagination<>();
+    private final RequestDAO requestDAO = new RequestDAO();
+    private final BillDAOProxy billDAOProxy = new BillDAOProxy();
+    private final Pagination<Request> pagination = new Pagination<>();
 
     /**
      * Deletes request from database, even if related bill exists and was payed.
      * If the bill exists, deletes it too.
+     *
      * @param id - id of the request to be deleted
      */
     private void cancelRequest(@NotNull int id) {
         Bill relatedBill = billDAOProxy.findBillByRequestId(id);
+
         if (relatedBill != null) {
             billDAOProxy.delete(relatedBill.getId());
         }
-        requestDAO.delete(id);
 
+        requestDAO.delete(id);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,8 +52,8 @@ public class UserRequestsServlet extends HttpServlet {
 
         User currentUser = (User) request.getSession().getAttribute("user");
         List<Request> requestsToDisplay = requestDAO.selectAll().stream()
-                                            .filter(r-> r.getUser().getId() == currentUser.getId())
-                                            .collect(Collectors.toList());
+                .filter(r -> r.getUser().getId() == currentUser.getId())
+                .collect(Collectors.toList());
 
         pagination.paginate(requestsToDisplay, request);
         request.getRequestDispatcher("templates/user/user-requests.jsp").forward(request, response);

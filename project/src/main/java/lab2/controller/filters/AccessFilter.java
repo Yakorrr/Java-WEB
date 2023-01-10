@@ -16,13 +16,12 @@ import static lab2.controller.util.Paths.ACCESS_ERROR_PAGE;
 import static lab2.controller.util.Paths.GENERAL_ERROR;
 import static lab2.controller.util.SessionTool.getUser;
 
-// Сам по себе - шаблон "Цепочка ответственности"?
 @WebFilter("/*")
 public class AccessFilter implements Filter {
     private static final List<String> adminPages = Arrays.asList("/admin", "/admin-users", "/admin-tables",
             "/admin-update", "/admin-users-update", "/approve", "/admin-update-rooms", "/logout");
 
-    private static final List<String> userPages = Arrays.asList( "/user-main",
+    private static final List<String> userPages = Arrays.asList("/user-main",
             "/user-my-bills", "/new-request", "/user-my-requests", "/logout");
 
     @Override
@@ -34,40 +33,40 @@ public class AccessFilter implements Filter {
         return adminPages.stream().filter(servletPath::equals).count() == 1;
     }
 
-    private static boolean  requiresUserRights(@NotNull String servletPath) {
+    private static boolean requiresUserRights(@NotNull String servletPath) {
         return userPages.stream().filter(servletPath::equals).count() == 1;
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String servletPath = req.getServletPath();
-        User user = getUser(req.getSession());
+        String servletPath = request.getServletPath();
+        User user = getUser(request.getSession());
         if (!requiresUserRights(servletPath) && !requiresAdminRights(servletPath)) {
             if (user == null) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else if (user.getRole() == Role.USER) {
-                response.sendRedirect("/user-main");
+                request.getRequestDispatcher("templates/user/user-main.jsp").forward(request, response);
             } else if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect("/admin");
+                request.getRequestDispatcher("admin").forward(request, response);
             } else {
-                response.sendRedirect(GENERAL_ERROR.getUrl());
+                request.getRequestDispatcher(GENERAL_ERROR.getUrl()).forward(request, response);
             }
             return;
         } else if (user != null && isAuthorized(servletPath, user)) {
-                filterChain.doFilter(servletRequest, servletResponse);
-                return;
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
         }
         System.out.println("No rights: redirecting back");
-        response.sendRedirect(ACCESS_ERROR_PAGE.getUrl());
+        request.getRequestDispatcher(ACCESS_ERROR_PAGE.getUrl()).forward(request, response);
     }
 
-    // TODO: check operation priority
     private boolean isAuthorized(@NotNull String servletPath, @NotNull User user) {
         return ((requiresAdminRights(servletPath)) && (user.getRole() == Role.ADMIN)) ||
-                    ((requiresUserRights(servletPath)) && (user.getRole() == Role.USER));
+                ((requiresUserRights(servletPath)) && (user.getRole() == Role.USER));
     }
 
     @Override

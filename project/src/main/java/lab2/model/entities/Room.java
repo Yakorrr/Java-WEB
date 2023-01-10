@@ -1,6 +1,5 @@
 package lab2.model.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Room {
     private static final Logger logger = Logger.getLogger(Room.class);
-
 
     @Getter
     @Setter
@@ -67,10 +65,12 @@ public class Room {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Room room = (Room) obj;
+
         return id == room.id &&
                 places == room.places &&
                 isOccupied == room.isOccupied &&

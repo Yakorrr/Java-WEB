@@ -24,10 +24,12 @@ public class DatePair {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DatePair datePair = (DatePair) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        DatePair datePair = (DatePair) obj;
+
         return startDate.toString().equals(datePair.startDate.toString()) &&
                 endDate.toString().equals(datePair.endDate.toString());
     }
