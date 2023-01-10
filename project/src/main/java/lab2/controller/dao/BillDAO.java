@@ -57,8 +57,8 @@ public class BillDAO extends AbstractDAO<Bill> {
     Bill setObjectParams(@NotNull ResultSet rs) throws SQLException {
         double sum = rs.getDouble("sum");
         boolean isPaid = rs.getBoolean("isPaid");
-        int req_id = rs.getInt("requests_id");
-        int room_id = rs.getInt("rooms_id");
+        int req_id = rs.getInt("request_id");
+        int room_id = rs.getInt("room_id");
 
         return new Bill(sum, isPaid,
                 new RequestDAO().selectById(req_id),

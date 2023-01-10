@@ -60,7 +60,7 @@ public class RequestDAO extends AbstractDAO<Request> {
 
     @Override
     Request setObjectParams(@NotNull ResultSet rs) throws SQLException {
-        User user = new UserDAO().selectById(rs.getInt("users_id"));
+        User user = new UserDAO().selectById(rs.getInt("user_id"));
         int places = rs.getInt("places");
         RoomClass roomClass = RoomClass.valueOf(rs.getString("class"));
         Date startDate = rs.getDate("start_date");

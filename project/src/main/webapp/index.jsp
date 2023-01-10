@@ -12,9 +12,10 @@
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="templates/css/styles.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
-<body>
+<body class="body-main">
+
 <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-light">
         <a class="p-2 link-dark" href="<c:url value="/login"/>"><%=Localization.getString("submit-value")%>
@@ -32,6 +33,7 @@
         </button>
     </div>
 </nav>
+
 <div class="lang-bar">
     <div class="lang-bar-images">
         <a href="<c:url value="/main?lang=ua"/>">
@@ -42,6 +44,7 @@
         </a>
     </div>
 </div>
+
 <div class="welcome">
     <h1 class="welcome-message"><%=Localization.getString("welcome-message1")%>
         <br>

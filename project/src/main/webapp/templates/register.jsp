@@ -23,9 +23,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-    <link rel="stylesheet" href="templates/css/register.css">
+    <link rel="stylesheet" href="templates/css/style.css">
+    <script type="text/javascript" src="templates/js/core.js"></script>
 </head>
-<body>
+<body class="body-forms">
 
 <div class="lang-bar">
     <div class="lang-bar-images">
@@ -39,25 +40,33 @@
 </div>
 
 <div class="container">
-    <div class="title">Registration</div>
+    <div class="title"><%=Localization.getString("registration-from-title")%>
+    </div>
     <div class="content">
-        <form action="register" method="post" novalidate>
+        <form class="register-form" action="register" method="post" novalidate>
             <div class="user-details">
                 <div class="input-box">
-                    <label class="details" for="first-name">First Name</label>
+                    <label class="details" for="first-name">
+                        <%=Localization.getString("form-first-name-title")%>
+                    </label>
                     <input type="text" id="first-name" name="first-name"
-                           placeholder="Enter your first name" required autofocus>
+                           placeholder="<%=Localization.getString("form-first-name-value")%>"
+                           required autofocus>
                 </div>
                 <div class="input-box">
-                    <label class="details" for="last-name">Last Name</label>
+                    <label class="details" for="last-name">
+                        <%=Localization.getString("form-last-name-title")%>
+                    </label>
                     <input type="text" id="last-name" name="last-name"
-                           placeholder="Enter your last name" required>
+                           placeholder="<%=Localization.getString("form-last-name-value")%>" required>
                 </div>
 
                 <div class="input-box">
-                    <label class="details" for="datepicker">Date of birth</label>
+                    <label class="details" for="datepicker">
+                        <%=Localization.getString("form-date-of-birth-title")%>
+                    </label>
                     <input type="text" id="datepicker" name="date-of-birth"
-                           placeholder="Enter your date of birth" required>
+                           placeholder="<%=Localization.getString("form-date-of-birth-value")%>" required>
                 </div>
 
                 <div class="input-box">
@@ -67,43 +76,59 @@
                            id="dot-2" required>
                     <input type="radio" class="gender-radio" name="gender"
                            id="dot-3" required>
-                    <label class="details">Gender</label>
+                    <label class="details">
+                        <%=Localization.getString("form-gender-title")%>
+                    </label>
                     <div class="category">
                         <label for="dot-1">
                             <span class="dot one"></span>
-                            <span class="gender">Male</span>
+                            <span class="gender">
+                                <%=Localization.getString("form-gender-one-value")%>
+                            </span>
                         </label>
                         <label for="dot-2">
                             <span class="dot two"></span>
-                            <span class="gender">Female</span>
+                            <span class="gender">
+                                <%=Localization.getString("form-gender-two-value")%>
+                            </span>
                         </label>
                         <label for="dot-3">
                             <span class="dot three"></span>
-                            <span class="gender">Other</span>
+                            <span class="gender">
+                                <%=Localization.getString("form-gender-three-value")%>
+                            </span>
                         </label>
                     </div>
                 </div>
 
                 <div class="input-box">
-                    <label class="details" for="telephone-number">Phone Number</label>
+                    <label class="details" for="telephone-number">
+                        <%=Localization.getString("form-telephone-title")%>
+                    </label>
                     <input type="text" id="telephone-number" name="telephone-number"
-                           placeholder="Enter your telephone number" required>
+                           placeholder="<%=Localization.getString("form-telephone-value")%>" required>
                 </div>
                 <div class="input-box">
-                    <label class="details" for="email">Email</label>
+                    <label class="details" for="email">
+                        <%=Localization.getString("form-email-title")%>
+                    </label>
                     <input type="text" id="email" name="email"
-                           placeholder="Enter your email" required>
+                           placeholder="<%=Localization.getString("form-email-value")%>" required>
                 </div>
 
                 <div class="input-box">
-                    <label class="details" for="password">Password</label>
+                    <label class="details" for="password">
+                        <%=Localization.getString("form-password-title")%>
+                    </label>
                     <input type="password" id="password" name="password"
-                           placeholder="Enter your password" required>
+                           placeholder="<%=Localization.getString("form-password-value")%>" required>
                 </div>
                 <div class="input-box">
-                    <label class="details" for="confirm-password">Confirm Password</label>
+                    <label class="details" for="confirm-password">
+                        <%=Localization.getString("form-confirm-password-title")%>
+                    </label>
                     <input type="password" id="confirm-password" name="confirm-password"
-                           placeholder="Confirm your password" required>
+                           placeholder="<%=Localization.getString("form-confirm-password-value")%>" required>
                 </div>
             </div>
 
@@ -115,33 +140,23 @@
                         if (!Objects.equals(message, null)) {
                             out.print(message);
                         }
-
-//                        if (!Objects.equals(message, null))
                     %>
                 </span>
             </div>
 
             <div class="button">
-                <input class="submit" type="submit" value="Register">
+                <input class="submit" type="submit"
+                       value="<%=Localization.getString("submit-register")%>">
             </div>
             <div class="sign-in">
-                Already have an account? <a href="<c:url value="/login"/>">Sign in now</a>
+                <%=Localization.getString("sign-in-text")%>
+                <a href="<c:url value="/login"/>">
+                    <%=Localization.getString("sign-in-link")%>
+                </a>
             </div>
         </form>
     </div>
 </div>
-
-<script>
-    $(function () {
-        $("#datepicker").datepicker({
-            format: 'yyyy-mm-dd',
-            startDate: "-150y",
-            endDate: new Date(),
-            todayHighlight: true,
-            toggleActive: true
-        });
-    });
-</script>
 
 </body>
 </html>

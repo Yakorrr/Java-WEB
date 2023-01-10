@@ -35,7 +35,7 @@
     <a class="btn btn-outline-primary" href="<c:url value="/logout"/>"><%=Localization.getString("u-header-logout")%>
     </a>
 </div>
-<br>
+
 <div class="lang-bar">
     <div class="lang-bar-images">
         <a href="<c:url value="/user-my-requests?lang=ua"/>">
@@ -46,7 +46,7 @@
         </a>
     </div>
 </div>
-<br>
+
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4"><%=Localization.getString("user-req-table-title")%>
     </h1>

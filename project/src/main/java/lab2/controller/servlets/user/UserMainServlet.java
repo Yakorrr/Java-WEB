@@ -52,7 +52,6 @@ public class UserMainServlet extends HttpServlet {
             int places = Integer.parseInt(request.getParameter("places"));
             RoomClass roomClass = RoomClass.valueOf(request.getParameter("class"));
             List<Date> dates = parseDates(request.getParameter("date-range"));
-            System.out.println("Dates: " + dates);
 
             Request newRequest = new Request((User) request.getSession().getAttribute("user"),
                     places,

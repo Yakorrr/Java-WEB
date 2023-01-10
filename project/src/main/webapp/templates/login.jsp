@@ -11,9 +11,9 @@
     </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 
-    <link rel="stylesheet" href="templates/css/login.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
-<body>
+<body class="body-forms">
 
 <div class="lang-bar">
     <div class="lang-bar-images">
@@ -27,13 +27,14 @@
 </div>
 
 <div class="main_div">
-    <div class="title"><%=Localization.getString("login-form-title")%></div>
+    <div class="title"><%=Localization.getString("login-form-title")%>
+    </div>
     <div class="social_icons">
         <a href="#"><i class="fab fa-google"></i><span>Google</span></a>
         <a href="#"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
         <a href="#"><i class="fab fa-twitter"></i><span>Twitter</span></a>
     </div>
-    <form action="login" method="post" novalidate>
+    <form class="login-form" action="login" method="post" novalidate>
         <div class="input_box">
             <label>
                 <input type="text" name="email"
@@ -53,10 +54,11 @@
                 <label>
                     <input type="checkbox">
                 </label>
-                <span>Remember me</span>
+                <span><%=Localization.getString("remember-me")%></span>
             </div>
             <div class="forget_div">
-                <a href="#">Forgot password?</a>
+                <a href="#"><%=Localization.getString("forgot-password")%>
+                </a>
             </div>
         </div>
 
@@ -75,8 +77,10 @@
         <div class="input_box button">
             <input type="submit" value="<%=Localization.getString("submit-value")%>">
         </div>
-        <div class="sign_up">
-            Not a member? <a href="<c:url value="/register"/>">Sign up now</a>
+        <div class="sign_up"><%=Localization.getString("sign-up-text")%>
+            <a href="<c:url value="/register"/>">
+                <%=Localization.getString("sign-up-link")%>
+            </a>
         </div>
     </form>
 </div>

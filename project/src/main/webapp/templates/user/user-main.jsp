@@ -8,18 +8,20 @@
 <head>
     <title><%=Localization.getString("user-main-msg")%> <%=u.getFirstName()%>
     </title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="templates/css/style.css">
     <link rel="icon"
           href="https://www.pinclipart.com/picdir/big/163-1634137_brochure-markant-online-books-icons-clipart.png"
           type="image/x-icon">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <link rel="stylesheet" href="templates/css/style.css">
+    <script type="text/javascript" src="templates/js/core.js"></script>
 </head>
-<body>
+<body class="body-pages">
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("u-header-welcome-msg")%> 🖖</h5>
     <nav class="my-2 my-md-0 mr-md-3">
@@ -34,7 +36,7 @@
     <a class="btn btn-outline-primary" href="<c:url value="/logout"/>"><%=Localization.getString("u-header-logout")%>
     </a>
 </div>
-<br>
+
 <div class="lang-bar">
     <div class="lang-bar-images">
         <a href="<c:url value="/user-main?lang=ua"/>">
@@ -73,8 +75,8 @@
                 </select></div>
             <div class="form-group col-6">
                 <label for="test"><%=Localization.getString("user-main-req-date")%>
-                </label><br>
-                <input type="text" name="date-range" id="test" value="01/01/2018 - 01/15/2018"/>
+                </label>
+                <input type="text" id="test" name="date-range" value="01/01/2018 - 01/15/2018"/>
             </div>
 
         </div>
