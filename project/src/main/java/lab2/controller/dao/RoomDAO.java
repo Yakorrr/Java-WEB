@@ -24,7 +24,7 @@ public class RoomDAO extends AbstractDAO<Room> {
     private static final String UPDATE = "UPDATE rooms SET places=?, class=?, isOccupied=?, picURL=?, price=? " +
             "WHERE id = ?;";
     private static final String FIND = "SELECT id FROM rooms " +
-            "WHERE (places=? AND class=? AND isOccupied=? AND picURL=? AND price=?);";
+            "WHERE (places=?, class=?, isOccupied=?, picURL=?, price=?);";
 
     Logger getLogger() { return logger; }
 

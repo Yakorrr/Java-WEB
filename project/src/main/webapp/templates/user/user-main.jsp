@@ -1,10 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.enums.RoomClass" %>
 <%@ page import="lab2.model.entities.User" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <% User u = (User) session.getAttribute("user");%>
+<!DOCTYPE html>
 <html>
 <head>
     <title><%=Localization.getString("user-main-msg")%> <%=u.getFirstName()%>
@@ -26,34 +26,34 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-pages">
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("u-header-welcome-msg")%> 🖖</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/user-main">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/user-main">
             <%=Localization.getString("u-header-new-req")%>
         </a>
         <a class="p-2 text-dark"
-           href="/user-my-requests">
+           href="${pageContext.request.contextPath}/user-my-requests">
             <%=Localization.getString("u-header-all-req")%>
         </a>
-        <a class="p-2 text-dark" href="/user-my-bills">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/user-my-bills">
             <%=Localization.getString("u-header-all-bill")%>
         </a>
     </nav>
-    <a class="btn btn-outline-primary" href="/logout">
+    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">
         <%=Localization.getString("u-header-logout")%>
     </a>
 </div>
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/user-main?lang=ua">
+        <a href="${pageContext.request.contextPath}/user-main?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/user-main?lang=en">
+        <a href="${pageContext.request.contextPath}/user-main?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -68,7 +68,7 @@
 <div class="wrapper-custom">
     <h3 class="m-4"><%=Localization.getString("user-main-req-title")%>
     </h3>
-    <form action="/new-request" method="post" class="m-4 user-main-form">
+    <form action="${pageContext.request.contextPath}/new-request" method="post" class="m-4 user-main-form">
         <div class="form-row">
             <div class="form-group col-3">
                 <label for="places"><%=Localization.getString("user-main-req-places")%> (1 - 10)</label>
@@ -88,8 +88,7 @@
                 <label for="test"><%=Localization.getString("user-main-req-date")%>
                 </label>
                 <input type="text" id="test" name="date-range"
-                       value="
-                        <%LocalDate.now();%>-<%=LocalDate.now().plusDays(7)%>"/>
+                       value="<%=LocalDate.now()%>-<%=LocalDate.now().plusDays(7)%>"/>
             </div>
 
         </div>

@@ -1,6 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Statistics</title>
@@ -47,7 +47,7 @@
         </tbody>
     </table>
 
-    <a class="back-to-main-link" href="/admin">
+    <a class="back-to-main-link" href="${pageContext.request.contextPath}/admin">
         <%=Localization.getString("back-to-main")%>
     </a>
 </div>

@@ -26,8 +26,8 @@ public class RequestDAO extends AbstractDAO<Request> {
     private static final String UPDATE = "UPDATE requests SET user_id=?, places=?, class=?," +
             " start_date=?, end_date=?, isApproved=? " +
             "WHERE id = ?;";
-    private static final String FIND = "SELECT id FROM requests " +
-            "WHERE (user_id=? AND places=? AND class=? AND start_date=? AND end_date=? AND isApproved=?);";
+    private static final String FIND = "SELECT * FROM requests " +
+            "WHERE user_id=?;";
 
     Logger getLogger() { return logger; }
 

@@ -29,7 +29,7 @@ public class MainServlet extends HttpServlet {
         }
 
         request.setAttribute("currentRole", role);
-        System.out.println("Entering MainServlet doGet method");
+        logger.info("Entering MainServlet doGet method");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

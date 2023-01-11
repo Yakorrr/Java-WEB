@@ -1,5 +1,6 @@
 package lab2.model.entities;
 
+import lab2.model.enums.Gender;
 import lombok.*;
 import org.apache.log4j.Logger;
 import lab2.model.enums.Language;
@@ -24,7 +25,7 @@ public class User {
     @Getter
     private LocalDate dateOfBirth;
     @Getter
-    private String gender;
+    private Gender gender;
     @Getter
     private String telephoneNumber;
     @Getter
@@ -36,7 +37,7 @@ public class User {
     @Getter
     private String passwordEncoded;
 
-    public User(String firstName, String lastName, LocalDate dateOfBirth, String gender,
+    public User(String firstName, String lastName, LocalDate dateOfBirth, Gender gender,
                 String telephoneNumber, String email,
                 Role role, Language language, String passwordEncoded) {
         setFirstName(firstName);
@@ -79,7 +80,7 @@ public class User {
         }
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         if (gender != null) {
             this.gender = gender;
         } else {

@@ -10,6 +10,7 @@
 }
 
 .body-main, .body-pages {
+    height: 100vh;
     min-height: 100vh;
     background-color: white;
     font-family: "Poppins", sans-serif;
@@ -554,7 +555,7 @@ form a:hover {
 .body-forms > .dow, .old-day, .day, .new-day {
     width: 40px !important;
     height: 40px !important;
-    border-radius: 0 !important;
+    border-radius: 50% !important;
 }
 
 .body-forms > .old-day:hover, .day:hover, .new-day:hover,
@@ -569,7 +570,7 @@ form a:hover {
     color: #fff !important;
 }
 
-.body-forms > .prev, .next, .datepicker-switch {
+.prev, .next, .datepicker-switch {
     border-radius: 0 !important;
     padding: 20px 10px !important;
     text-transform: uppercase;
@@ -578,7 +579,12 @@ form a:hover {
     opacity: 0.8;
 }
 
-.body-forms > .prev:hover, .next:hover, .datepicker-switch:hover {
+.body-pages .prev, .body-pages .next,
+.body-pages .datepicker-switch {
+    color: black !important;
+}
+
+.prev:hover, .next:hover, .datepicker-switch:hover {
     background-color: inherit !important;
     opacity: 1;
 }
@@ -643,6 +649,12 @@ form a:hover {
 
 .body-pages .form-row {
     flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.body-pages .form-row:nth-child(2) {
+    width: 80%;
+    margin: auto;
     justify-content: space-evenly;
 }
 
@@ -713,6 +725,10 @@ form a:hover {
     border-bottom: 2px solid #5fbae9;
 }
 
+.body-pages > .day {
+    border-radius: 50% !important;
+}
+
 .body-pages input[type=button],
 .body-pages input[type=submit],
 .body-pages input[type=reset] {
@@ -761,8 +777,7 @@ form a:hover {
     text-decoration: none;
     display: block;
     font-size: 16px;
-    width: 85%;
-    margin: auto;
+    width: 100%;
     border: 1px solid #f6f6f6;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;

@@ -5,6 +5,7 @@ import lab2.controller.util.Localization;
 import lab2.controller.util.PasswordEncoder;
 import lab2.controller.util.StringConverter;
 import lab2.model.entities.User;
+import lab2.model.enums.Gender;
 import lab2.model.enums.Role;
 
 import javax.servlet.ServletException;
@@ -17,11 +18,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import static lab2.controller.util.Paths.LOGIN;
+import static lab2.model.enums.Paths.LOGIN;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("templates/register.jsp").forward(request, response);
@@ -85,7 +85,7 @@ public class RegisterServlet extends HttpServlet {
             newUser.setFirstName(StringConverter.decodeParameter(firstName));
             newUser.setLastName(StringConverter.decodeParameter(lastName));
             newUser.setDateOfBirth(LocalDate.parse(StringConverter.decodeParameter(dateOfBirth)));
-            newUser.setGender(StringConverter.decodeParameter(gender));
+            newUser.setGender(Gender.valueOf(StringConverter.decodeParameter(gender)));
             newUser.setTelephoneNumber(StringConverter.decodeParameter(telephoneNumber));
             newUser.setEmail(StringConverter.decodeParameter(email));
             newUser.setRole(Role.USER);

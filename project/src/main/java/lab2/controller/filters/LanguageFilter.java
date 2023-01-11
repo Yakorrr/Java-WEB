@@ -1,6 +1,7 @@
 package lab2.controller.filters;
 
 import lab2.controller.util.Localization;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -9,9 +10,11 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class LanguageFilter implements Filter {
+    private static final Logger logger = Logger.getLogger(LanguageFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) {
-        System.out.println("Language filter initialized");
+        logger.info("Language filter initialized");
     }
 
     @Override
@@ -24,6 +27,6 @@ public class LanguageFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("Language filter destroyed");
+        logger.info("Language filter destroyed");
     }
 }

@@ -14,7 +14,6 @@ public class LogFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
         logger.info("Log filter initialized");
-        System.out.println("Log filter initialized");
     }
 
     @Override
@@ -25,14 +24,12 @@ public class LogFilter implements Filter {
         String servletPath = request.getServletPath();
 
         logger.info("ServletPath: " + servletPath + ", URL = " + request.getRequestURL());
-//        System.out.println("ServletPath: " + servletPath + ", URL = " + req.getRequestURL());
 
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        logger.info("destroyed");
-        System.out.println("Log filter destroyed");
+        logger.info("Log filter destroyed");
     }
 }

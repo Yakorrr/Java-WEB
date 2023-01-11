@@ -3,6 +3,7 @@ package lab2.controller.filters;
 import com.sun.istack.internal.NotNull;
 import lab2.model.enums.Role;
 import lab2.model.entities.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -12,12 +13,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static lab2.controller.util.Paths.ACCESS_ERROR_PAGE;
-import static lab2.controller.util.Paths.GENERAL_ERROR;
+import static lab2.model.enums.Paths.ACCESS_ERROR_PAGE;
+import static lab2.model.enums.Paths.GENERAL_ERROR;
 import static lab2.controller.util.SessionTool.getUser;
 
 @WebFilter("/*")
 public class AccessFilter implements Filter {
+    private static final Logger logger = Logger.getLogger(AccessFilter.class);
+
     private static final List<String> adminPages = Arrays.asList("/admin", "/admin-users", "/admin-tables",
             "/admin-update", "/admin-users-update", "/approve", "/admin-update-rooms", "/logout");
 
@@ -26,7 +29,7 @@ public class AccessFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        System.out.println("Access filter initialized");
+        logger.info("Access filter initialized");
     }
 
     private static boolean requiresAdminRights(@NotNull String servletPath) {
@@ -45,6 +48,7 @@ public class AccessFilter implements Filter {
 
         String servletPath = request.getServletPath();
         User user = getUser(request.getSession());
+
         if (!requiresUserRights(servletPath) && !requiresAdminRights(servletPath)) {
             if (user == null) {
                 filterChain.doFilter(servletRequest, servletResponse);
@@ -55,12 +59,14 @@ public class AccessFilter implements Filter {
             } else {
                 request.getRequestDispatcher(GENERAL_ERROR.getUrl()).forward(request, response);
             }
+
             return;
         } else if (user != null && isAuthorized(servletPath, user)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        System.out.println("No rights: redirecting back");
+
+        logger.error("No rights: redirecting back");
         request.getRequestDispatcher(ACCESS_ERROR_PAGE.getUrl()).forward(request, response);
     }
 
@@ -71,6 +77,6 @@ public class AccessFilter implements Filter {
 
     @Override
     public void destroy() {
-        System.out.println("Access filter destroyed");
+        logger.info("Access filter destroyed");
     }
 }

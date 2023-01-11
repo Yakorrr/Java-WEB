@@ -1,6 +1,7 @@
 package lab2.controller.dao;
 
 import com.sun.istack.internal.NotNull;
+import lab2.model.enums.Gender;
 import lab2.model.enums.Language;
 import lab2.model.enums.Role;
 import lab2.model.entities.User;
@@ -24,13 +25,13 @@ public class UserDAO extends AbstractDAO<User> {
     private static final String SELECT_ALL = "select * from users;";
     private static final String DELETE = "DELETE FROM users " +
             "WHERE id = ?;";
-    private static final String UPDATE = "UPDATE users SET first_name=? AND last_name=?" +
-            " AND date_of_birth=? AND gender=? AND telephone_number=? AND email=? " +
-            "AND role=? AND language=? AND pass_encoded=? " +
+    private static final String UPDATE = "UPDATE users SET first_name=?, last_name=?, " +
+            "date_of_birth=?, gender=?, telephone_number=?, email=?, " +
+            "role=?, language=?, pass_encoded=? " +
             "WHERE id = ?;";
     private static final String FIND = "SELECT id FROM users " +
-            "WHERE (first_name=? AND last_name=? AND date_of_birth=? AND gender=? " +
-            "AND telephone_number=? AND email=? AND role=? AND language=? AND pass_encoded=?);";
+            "WHERE (first_name=?, last_name=?, date_of_birth=?, gender=?, " +
+            "telephone_number=?, email=?, role=?, language=?, pass_encoded=?);";
 
     Logger getLogger() {
         return logger;
@@ -65,7 +66,7 @@ public class UserDAO extends AbstractDAO<User> {
         preparedStatement.setString(1, object.getFirstName());
         preparedStatement.setString(2, object.getLastName());
         preparedStatement.setDate(3, Date.valueOf(object.getDateOfBirth()));
-        preparedStatement.setString(4, object.getGender());
+        preparedStatement.setString(4, object.getGender().toString());
         preparedStatement.setString(5, object.getTelephoneNumber());
         preparedStatement.setString(6, object.getEmail());
         preparedStatement.setString(7, object.getRole().toString());
@@ -83,7 +84,7 @@ public class UserDAO extends AbstractDAO<User> {
         String firstName = rs.getString("first_name");
         String lastName = rs.getString("last_name");
         String dateOfBirth = rs.getString("date_of_birth");
-        String gender = rs.getString("gender");
+        Gender gender = Gender.valueOf(rs.getString("gender"));
         String telephoneNumber = rs.getString("telephone_number");
         String email = rs.getString("email");
         Role role = Role.valueOf(rs.getString("role"));

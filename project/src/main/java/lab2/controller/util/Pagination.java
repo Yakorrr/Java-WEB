@@ -3,13 +3,15 @@ package lab2.controller.util;
 import com.sun.istack.internal.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Pagination<T> {
+    private static final Logger logger = Logger.getLogger(Pagination.class);
+
     @Getter
     @Setter
     private static int entriesPerPage = 3;
@@ -56,7 +58,7 @@ public class Pagination<T> {
         try {
             pageId = Integer.parseInt(page);
         } catch (Exception e) {
-            System.out.println("Invalid page!");
+            logger.error(e.getMessage());
         }
 
         request.setAttribute("entries" + tag, getEntries(allEntries, pageId));
@@ -80,7 +82,7 @@ public class Pagination<T> {
         try {
             pageId = Integer.parseInt(page);
         } catch (Exception e) {
-            System.out.println("Invalid page!");
+            logger.error(e.getMessage());
         }
 
         request.setAttribute("entries", getEntries(allEntries, pageId));

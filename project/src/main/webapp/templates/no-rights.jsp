@@ -1,5 +1,6 @@
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><%=Localization.getString("access-den-title")%>
@@ -10,7 +11,7 @@
           href="https://www.pinclipart.com/picdir/big/163-1634137_brochure-markant-online-books-icons-clipart.png"
           type="image/x-icon">
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-pages">
 <div class="error">
@@ -20,7 +21,7 @@
     <p class="lead"><%=Localization.getString("access-den-err-text")%>
     </p>
 
-    <a href="/">
+    <a href="${pageContext.request.contextPath}/">
         <%=Localization.getString("access-den-back")%>
     </a>
 </div>

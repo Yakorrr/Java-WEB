@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.entities.Request" %>
 <%@ page import="lab2.model.entities.Room" %>
@@ -17,7 +16,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 
 <body class="body-pages">
@@ -26,27 +25,27 @@
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("a-header-welcome")%>
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/admin">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin">
             <%=Localization.getString("a-header-main")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-users">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-users">
             <%=Localization.getString("a-header-users")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-tables">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-tables">
             <%=Localization.getString("a-header-tables")%>
         </a>
     </nav>
-    <a class="btn btn-outline-primary" href="/logout">
+    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">
         <%=Localization.getString("u-header-logout")%>
     </a>
 </div>
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/approve?lang=ua">
+        <a href="${pageContext.request.contextPath}/approve?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/approve?lang=en">
+        <a href="${pageContext.request.contextPath}/approve?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -57,7 +56,7 @@
     </h3>
 
     <% Request req = (Request) request.getAttribute("selected-request");%>
-    <form action="/approve" method="post" class="m-4">
+    <form action="${pageContext.request.contextPath}/approve" method="post" class="m-4">
         <div class="form-row">
             <div class="form-group col-1">
                 <label for="id">#</label>
@@ -150,14 +149,14 @@
                     if (i == active) {%>
             <li class="page-item active">
                 <a class="page-link"
-                   href="/approve?page=
+                   href="${pageContext.request.contextPath}/approve?page=
                     <%=i%>&method=approve&id=<%=req.getId()%>"><%=i%>
                 </a>
             </li>
             <%} else {%>
             <li class="page-item">
                 <a class="page-link"
-                   href="/approve?page=
+                   href="${pageContext.request.contextPath}/approve?page=
                     <%=i%>&method=approve&id=<%=req.getId()%>"><%=i%>
                 </a>
             </li>
@@ -168,7 +167,7 @@
         </ul>
     </nav>
 
-    <a class="back-to-main-link" href="/admin">
+    <a class="back-to-main-link" href="${pageContext.request.contextPath}/admin">
         <%=Localization.getString("back-to-main")%>
     </a>
 </div>

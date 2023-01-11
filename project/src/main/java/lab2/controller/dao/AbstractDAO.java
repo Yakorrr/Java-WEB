@@ -74,6 +74,7 @@ public abstract class AbstractDAO<T> {
              PreparedStatement ps = connection.prepareStatement(getInsert())) {
             logger.info("Inserting into DB");
             setStatement(ps, object);
+
             logger.info("Executing statement: " + ps);
             ps.executeUpdate();
         } catch (SQLException | NotEnoughDataException e) {
@@ -142,6 +143,30 @@ public abstract class AbstractDAO<T> {
         return objectList;
     }
 
+    public List<T> selectAllByUserId(@NotNull int id) {
+        Logger logger = getLogger();
+        List<T> objectList = new ArrayList<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(getFind())) {
+            ps.setInt(1, id);
+            logger.info("Executing statement: " + ps);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                T object = setObjectParams(rs);
+                setObjectId(rs, object);
+                objectList.add(object);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        logger.info("Select all: success");
+
+        return objectList;
+    }
+
     /**
      * Deletes an object by its id
      *
@@ -190,33 +215,5 @@ public abstract class AbstractDAO<T> {
         logger.info("Update: success");
 
         return rowUpdated;
-    }
-
-    /**
-     * returns id of the given object, -1 if object wasn't found
-     *
-     * @param object - object to be found
-     * @return the id of the object in database
-     */
-    public int findId(@NotNull T object) {
-        Logger logger = getLogger();
-        int id = -1;
-
-        try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(getFind())) {
-            setStatement(ps, object);
-            logger.info("Executing statement: " + ps);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                id = rs.getInt("id");
-            }
-        } catch (SQLException | NotEnoughDataException e) {
-            logger.error(e.getMessage());
-        }
-
-        logger.info("Select by id: success");
-
-        return id;
     }
 }

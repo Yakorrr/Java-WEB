@@ -1,6 +1,7 @@
 package lab2.controller.servlets.admin;
 
 import com.sun.istack.internal.NotNull;
+import lab2.model.enums.Gender;
 import org.apache.log4j.Logger;
 import lab2.controller.dao.*;
 import lab2.controller.util.Pagination;
@@ -46,7 +47,7 @@ public class AdminServlet extends HttpServlet {
                 String firstName = request.getParameter("first-name");
                 String lastName = request.getParameter("last-name");
                 String dateOfBirth = request.getParameter("date-of-birth");
-                String gender = request.getParameter("gender");
+                Gender gender = Gender.valueOf(request.getParameter("gender"));
                 String telephoneNumber = request.getParameter("telephone-number");
                 String email = request.getParameter("email");
                 Role role = Role.valueOf(request.getParameter("role"));
@@ -140,18 +141,23 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
         String method = request.getParameter("method");
         String id = request.getParameter("id");
+        String admin = request.getParameter("admin-id");
+
         UserDAOProxy proxyDao = new UserDAOProxy();
 
         if (method != null && id != null) {
             switch (method) {
                 case "remove":
-                    proxyDao.delete(id);
+                    if (!id.equals(admin)) proxyDao.delete(id);
+                    else logger.info("Error during deletion: current admin is unable to delete himself");
                     break;
                 case "privilege_a":
-                    proxyDao.toAdmin(id);
+                    if (!id.equals(admin)) proxyDao.toAdmin(id);
+                    else logger.info("Current admin is unable to grant admin rights to himself");
                     break;
                 case "privilege_u":
-                    proxyDao.toUser(id);
+                    if (!id.equals(admin)) proxyDao.toUser(id);
+                    else logger.info("Current admin is unable to grant user rights to himself");
                     break;
             }
         }

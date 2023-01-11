@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.entities.Request" %>
 <%@ page import="java.util.ArrayList" %>
@@ -24,7 +23,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-pages">
 
@@ -32,26 +31,26 @@
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("a-header-welcome")%>
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/admin">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin">
             <%=Localization.getString("a-header-main")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-users">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-users">
             <%=Localization.getString("a-header-users")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-tables">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-tables">
             <%=Localization.getString("a-header-tables")%>
         </a>
     </nav>
-    <a class="btn btn-outline-primary" href="/logout">
+    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">
         <%=Localization.getString("u-header-logout")%>
     </a>
 </div>
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/admin?lang=ua">
+        <a href="${pageContext.request.contextPath}/admin?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/admin?lang=en">
+        <a href="${pageContext.request.contextPath}/admin?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -71,7 +70,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col"><%=Localization.getString("u-u-name")%>
+                <th scope="col"><%=Localization.getString("u-u-first-name")%>
                 </th>
                 <th scope="col"><%=Localization.getString("user-req-table-plc")%>
                 </th>
@@ -98,7 +97,7 @@
                 <td><%=req.getEndDate()%>
                 </td>
                 <td>
-                    <a href="/approve?method=approve&id=<%=req.getId()%>">
+                    <a href="${pageContext.request.contextPath}/approve?method=approve&id=<%=req.getId()%>">
                         <%=Localization.getString("approve-btn")%>
                     </a>
                 </td>
@@ -114,13 +113,13 @@
                         if (i == active) {%>
                 <li class="page-item active">
                     <a class="page-link"
-                       href="/admin?page=<%=i%>"><%=i%>
+                       href="${pageContext.request.contextPath}/admin?page=<%=i%>"><%=i%>
                     </a>
                 </li>
                 <%} else {%>
                 <li class="page-item">
                     <a class="page-link"
-                       href="/admin?page=<%=i%>"><%=i%>
+                       href="${pageContext.request.contextPath}/admin?page=<%=i%>"><%=i%>
                     </a>
                 </li>
                 <%

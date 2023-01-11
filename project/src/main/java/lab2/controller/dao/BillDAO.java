@@ -23,7 +23,7 @@ public class BillDAO extends AbstractDAO<Bill> {
             "WHERE id = ?;";
 
     private static final String FIND = "SELECT id FROM bills " +
-            "WHERE (sum=? AND isPaid=? AND request_id=? AND room_id=? );";
+            "WHERE (sum=?, isPaid=?, request_id=?, room_id=? );";
 
 
     Logger getLogger() { return logger; }

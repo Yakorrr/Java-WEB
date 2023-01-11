@@ -3,7 +3,7 @@ package lab2.controller.servlets;
 import lab2.controller.dao.UserDAO;
 import lab2.controller.util.Localization;
 import lab2.controller.util.PasswordEncoder;
-import lab2.controller.util.Paths;
+import lab2.model.enums.Paths;
 import lab2.controller.util.StringConverter;
 import lab2.model.enums.Role;
 import lab2.model.entities.User;
@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
                 } else if (u.getPasswordEncoded().equals(PasswordEncoder.getSHA(password))) {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", u);
+                    request.getServletContext().setAttribute("user", u);
                     Localization.setCurrentLanguage(u.getLanguage());
 
                     if (u.getRole() == Role.USER) {

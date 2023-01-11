@@ -1,6 +1,6 @@
 <%@ page import="lab2.controller.util.Localization" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><%=Localization.getString("welcome-title")%>
@@ -12,16 +12,16 @@
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-main">
 
 <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-light">
-        <a class="p-2 link-dark" href="/login">
+        <a class="p-2 link-dark" href="${pageContext.request.contextPath}/login">
             <%=Localization.getString("submit-value")%>
         </a>
-        <a class="p-2 link-dark" href="/register">
+        <a class="p-2 link-dark" href="${pageContext.request.contextPath}/register">
             <%=Localization.getString("register-link-text")%>
         </a>
     </div>
@@ -38,10 +38,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/main?lang=ua">
+        <a href="${pageContext.request.contextPath}/main?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/main?lang=en">
+        <a href="${pageContext.request.contextPath}/main?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -54,7 +54,7 @@
 </div>
 <div class="br-line"></div>
 <img class="index-image"
-     src="/templates/img/hotel/hotel.jpg"
+     src="templates/img/hotel/hotel.jpg"
      alt="hotel image">
 </body>
 </html>

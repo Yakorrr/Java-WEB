@@ -23,7 +23,6 @@ public class BillDAOProxy extends BillDAO {
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_REQUEST)) {
-
             preparedStatement.setInt(1, id);
             logger.info("Executing statement: " + preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8"
@@ -17,10 +16,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/login?lang=ua">
+        <a href="${pageContext.request.contextPath}/login?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua-flag">
         </a>
-        <a href="/login?lang=en">
+        <a href="${pageContext.request.contextPath}/login?lang=en">
             <img src="templates/img/us-01.png" alt="us-flag">
         </a>
     </div>
@@ -78,7 +77,7 @@
             <input type="submit" value="<%=Localization.getString("submit-value")%>">
         </div>
         <div class="sign_up"><%=Localization.getString("sign-up-text")%>
-            <a href="/register">
+            <a href="${pageContext.request.contextPath}/register">
                 <%=Localization.getString("sign-up-link")%>
             </a>
         </div>

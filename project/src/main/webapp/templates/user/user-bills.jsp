@@ -1,8 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.entities.Bill" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><%=Localization.getString("u-header-all-bill")%>
@@ -24,35 +24,35 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-pages">
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("u-header-welcome-msg")%> 🖖</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/user-main">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/user-main">
             <%=Localization.getString("u-header-new-req")%>
         </a>
         <a class="p-2 text-dark"
-           href="/user-my-requests">
+           href="${pageContext.request.contextPath}/user-my-requests">
             <%=Localization.getString("u-header-all-req")%>
         </a>
-        <a class="p-2 text-dark" href="/user-my-bills">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/user-my-bills">
             <%=Localization.getString("u-header-all-bill")%>
         </a>
     </nav>
-    <a class="btn btn-outline-primary" href="/logout">
+    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">
         <%=Localization.getString("u-header-logout")%>
     </a>
 </div>
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/user-my-bills?lang=ua">
+        <a href="${pageContext.request.contextPath}/user-my-bills?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/user-my-bills?lang=en">
+        <a href="${pageContext.request.contextPath}/user-my-bills?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
@@ -95,7 +95,7 @@
             </td>
             <td>
                 <% if (!b.isPaid()) {%>
-                <a href="/user-my-bills?method=pay&id=<%=b.getId()%>">
+                <a href="${pageContext.request.contextPath}/user-my-bills?method=pay&id=<%=b.getId()%>">
                     <%=Localization.getString("user-req-table-pay")%>
                 </a>
                 <%}%>
@@ -111,12 +111,12 @@
                 for (int i = 1; i <= pageCount; i++) {
                     if (i == active) {%>
             <li class="page-item active">
-                <a class="page-link" href="/user-my-bills?page=<%=i%>"><%=i%>
+                <a class="page-link" href="${pageContext.request.contextPath}/user-my-bills?page=<%=i%>"><%=i%>
                 </a>
             </li>
             <%} else {%>
             <li class="page-item">
-                <a class="page-link" href="/user-my-bills?page=<%=i%>"><%=i%>
+                <a class="page-link" href="${pageContext.request.contextPath}/user-my-bills?page=<%=i%>"><%=i%>
                 </a>
             </li>
             <%
@@ -125,7 +125,7 @@
             %>
         </ul>
     </nav>
-    <a class="back-to-main-link" href="/user-main">
+    <a class="back-to-main-link" href="${pageContext.request.contextPath}/user-main">
         <%=Localization.getString("back-to-main")%>
     </a>
 </div>

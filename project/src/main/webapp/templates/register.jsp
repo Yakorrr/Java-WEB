@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8"
@@ -30,10 +29,10 @@
 
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/register?lang=ua">
+        <a href="${pageContext.request.contextPath}/register?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua-flag">
         </a>
-        <a href="/register?lang=en">
+        <a href="${pageContext.request.contextPath}/register?lang=en">
             <img src="templates/img/us-01.png" alt="us-flag">
         </a>
     </div>
@@ -70,12 +69,12 @@
                 </div>
 
                 <div class="input-box">
-                    <input type="radio" class="gender-radio" name="gender"
-                           id="dot-1" required>
-                    <input type="radio" class="gender-radio" name="gender"
-                           id="dot-2" required>
-                    <input type="radio" class="gender-radio" name="gender"
-                           id="dot-3" required>
+                    <input type="radio" class="gender-radio" id="dot-1"
+                           name="gender" value="male" required>
+                    <input type="radio" class="gender-radio" id="dot-2"
+                           name="gender" value="female" required>
+                    <input type="radio" class="gender-radio" id="dot-3"
+                           name="gender" value="other" required>
                     <label class="details">
                         <%=Localization.getString("form-gender-title")%>
                     </label>
@@ -150,7 +149,7 @@
             </div>
             <div class="sign-in">
                 <%=Localization.getString("sign-in-text")%>
-                <a href="/login">
+                <a href="${pageContext.request.contextPath}/login">
                     <%=Localization.getString("sign-in-link")%>
                 </a>
             </div>
@@ -160,4 +159,3 @@
 
 </body>
 </html>
-

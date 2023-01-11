@@ -124,7 +124,7 @@ public class ApproveServlet extends HttpServlet {
             Bill bill = new Bill(selected.getPrice(), false, relatedRequest, selected);
             billDAO.insert(bill);
         } catch (Exception e) {
-            System.out.println("Error making approving request");
+            logger.info("Error making approving request");
         }
 
         ServletContext context = getServletContext();

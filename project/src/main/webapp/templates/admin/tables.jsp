@@ -1,10 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.enums.RoomClass" %>
 <%@ page import="lab2.model.entities.Bill" %>
 <%@ page import="lab2.model.entities.Room" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><%=Localization.getString("a-header-tables")%>
@@ -17,7 +17,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <body class="body-pages">
 
@@ -25,33 +25,34 @@
     <h5 class="my-0 mr-md-auto font-weight-normal"><%=Localization.getString("a-header-welcome")%>
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/admin">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin">
             <%=Localization.getString("a-header-main")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-users">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-users">
             <%=Localization.getString("a-header-users")%>
         </a>
-        <a class="p-2 text-dark" href="/admin-tables">
+        <a class="p-2 text-dark" href="${pageContext.request.contextPath}/admin-tables">
             <%=Localization.getString("a-header-tables")%>
         </a>
     </nav>
-    <a class="btn btn-outline-primary" href="/logout">
+    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">
         <%=Localization.getString("u-header-logout")%>
     </a>
 </div>
 <div class="lang-bar">
     <div class="lang-bar-images">
-        <a href="/admin-tables?lang=ua">
+        <a href="${pageContext.request.contextPath}/admin-tables?lang=ua">
             <img src="templates/img/ua-01.png" alt="ua">
         </a>
-        <a href="/admin-tables?lang=en">
+        <a href="${pageContext.request.contextPath}/admin-tables?lang=en">
             <img src="templates/img/us-01.png" alt="en">
         </a>
     </div>
 </div>
 
 <div class="main-wrapper">
-    <h3 class="m-4"><%=Localization.getString("user-bills-table-title")%>
+    <h3 class="m-4" id="bills">
+        <%=Localization.getString("user-bills-table-title")%>
     </h3>
 
     <table class="table admin-table">
@@ -95,15 +96,13 @@
                     if (i == active) {%>
             <li class="page-item active">
                 <a class="page-link"
-                   href="/admin-tables?page-rooms=
-                    <%=(Integer) request.getAttribute("active-page-rooms")%>&page-bills=<%=i%>"><%=i%>
+                   href="${pageContext.request.contextPath}/admin-tables?page-rooms=<%=(Integer) request.getAttribute("active-page-rooms")%>&page-bills=<%=i%>#bills"><%=i%>
                 </a>
             </li>
             <%} else {%>
             <li class="page-item">
                 <a class="page-link"
-                   href="/admin-tables?page-rooms=
-                    <%=(Integer) request.getAttribute("active-page-rooms")%>&page-bills=<%=i%>"><%=i%>
+                   href="${pageContext.request.contextPath}/admin-tables?page-rooms=<%=(Integer) request.getAttribute("active-page-rooms")%>&page-bills=<%=i%>#bills"><%=i%>
                 </a>
             </li>
             <%
@@ -114,7 +113,8 @@
     </nav>
 
 
-    <h3 class="m-4"><%=Localization.getString("room-title")%>
+    <h3 class="m-4" id="rooms">
+        <%=Localization.getString("room-title")%>
     </h3>
 
     <table class="table admin-table">
@@ -157,15 +157,13 @@
                     if (i == active) {%>
             <li class="page-item active">
                 <a class="page-link"
-                   href="/admin-tables?page-rooms=
-                    <%=i%>&&page-bills=<%=(Integer) request.getAttribute("active-page-bills")%>"><%=i%>
+                   href="${pageContext.request.contextPath}/admin-tables?page-rooms=<%=i%>&&page-bills=<%=(Integer) request.getAttribute("active-page-bills")%>#rooms"><%=i%>
                 </a>
             </li>
             <%} else {%>
             <li class="page-item">
                 <a class="page-link"
-                   href="/admin-tables?page-rooms=
-                    <%=i%>&&page-bills=<%=(Integer) request.getAttribute("active-page-bills")%>"><%=i%>
+                   href="${pageContext.request.contextPath}/admin-tables?page-rooms=<%=i%>&&page-bills=<%=(Integer) request.getAttribute("active-page-bills")%>#rooms"><%=i%>
                 </a>
             </li>
             <%
@@ -175,10 +173,11 @@
         </ul>
     </nav>
 
-    <h3 class="m-4"><%=Localization.getString("add-room")%>
+    <h3 class="m-4" id="add-room">
+        <%=Localization.getString("add-room")%>
     </h3>
 
-    <form action="/admin-update-rooms" method="post" class="m-4">
+    <form action="${pageContext.request.contextPath}/admin-update-rooms#add-room" method="post" class="m-4">
         <div class="form-row">
             <div class="form-group col-3">
                 <label for="picture"><%=Localization.getString("pic-url")%>
@@ -188,7 +187,7 @@
             <div class="form-group col-2">
                 <label for="places"><%=Localization.getString("n-of-places")%>
                 </label>
-                <input type="number" class="form-control" id="places" name="places" min="0">
+                <input type="number" class="form-control" id="places" name="places" min="1" max="10">
             </div>
             <div class="form-group col-2">
                 <label for="roomClass"><%=Localization.getString("select-r-class")%>
@@ -212,7 +211,7 @@
         </button>
     </form>
 
-    <a class="back-to-main-link" href="/admin">
+    <a class="back-to-main-link" href="${pageContext.request.contextPath}/admin">
         <%=Localization.getString("back-to-main")%>
     </a>
 </div>

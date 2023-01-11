@@ -1,4 +1,4 @@
-package lab2.controller.util;
+package lab2.model.enums;
 
 public enum Paths {
     ACCESS_ERROR_PAGE("templates/no-rights.jsp"),
