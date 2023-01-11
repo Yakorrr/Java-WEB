@@ -28,6 +28,10 @@ public class JDBCVars {
         return connection;
     }
 
+    public static boolean testConnection() {
+        return (getConnection() != null);
+    }
+
     private JDBCVars() {
 
     }

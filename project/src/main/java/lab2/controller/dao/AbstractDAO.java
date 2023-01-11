@@ -216,4 +216,30 @@ public abstract class AbstractDAO<T> {
 
         return rowUpdated;
     }
+
+    /**
+     * returns id of the given object, -1 if object wasn't found
+     *
+     * @param object - object to be found
+     * @return the id of the object in database
+     */
+    public int findId(@NotNull T object) {
+        Logger logger = getLogger();
+        int id = -1;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(getFind())) {
+
+            setStatement(preparedStatement, object);
+            logger.info("Executing statement: " + preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException | NotEnoughDataException e) {
+            logger.error(e.getMessage());
+        }
+        logger.info("Select by id: success");
+        return id;
+    }
 }
