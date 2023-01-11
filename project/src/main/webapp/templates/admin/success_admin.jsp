@@ -1,7 +1,9 @@
 <%@ page import="lab2.controller.util.Localization" %>
 <%@ page import="lab2.model.entities.Request" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="lab2.model.entities.User" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<% User u = (User) session.getAttribute("user");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +60,9 @@
 
 <div class="main-wrapper">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4"><%=Localization.getString("a-success-message")%>
+        <h1 class="display-4">
+            <%=Localization.getString("a-success-message-admin")%> <%=u.getFirstName()%>
+            <%=Localization.getString("a-success-message-login")%>
         </h1>
         <p class="lead"><%=Localization.getString("a-success-message-lead")%>
         </p>

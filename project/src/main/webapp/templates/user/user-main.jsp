@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%=Localization.getString("user-main-msg")%> <%=u.getFirstName()%>
+    <title><%=Localization.getString("user-main-msg")%>, <%=u.getFirstName()%>!
     </title>
     <link rel="icon"
           href="https://www.pinclipart.com/picdir/big/163-1634137_brochure-markant-online-books-icons-clipart.png"
@@ -60,7 +60,7 @@
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4"><%=Localization.getString("user-main-msg")%> <%=u.getFirstName()%>
+    <h1 class="display-4"><%=Localization.getString("user-main-msg")%>, <%=u.getFirstName()%>!
     </h1>
     <p class="lead"><%=Localization.getString("user-main-msg-small")%>
     </p>

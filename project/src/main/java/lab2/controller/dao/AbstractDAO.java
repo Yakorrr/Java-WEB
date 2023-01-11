@@ -143,7 +143,7 @@ public abstract class AbstractDAO<T> {
         return objectList;
     }
 
-    public List<T> selectAllByUserId(@NotNull int id) {
+    public List<T> find(@NotNull int id) {
         Logger logger = getLogger();
         List<T> objectList = new ArrayList<>();
 

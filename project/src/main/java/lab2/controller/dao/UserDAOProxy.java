@@ -22,7 +22,7 @@ public class UserDAOProxy extends UserDAO {
             RequestDAO requestDAO = new RequestDAO();
             BillDAOProxy billDAOProxy = new BillDAOProxy();
 
-            List<Request> requests = requestDAO.selectAllByUserId(intId.get());
+            List<Request> requests = requestDAO.find(intId.get());
 
             if (requests != null) {
                 for (Request r : requests) {
