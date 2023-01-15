@@ -1,8 +1,7 @@
-package lab2.model.entities;
+package lab2.controller.util;
 
 import com.sun.istack.internal.NotNull;
 import lombok.Getter;
-import lab2.controller.util.DateUtil;
 
 import java.sql.Date;
 import java.util.Objects;

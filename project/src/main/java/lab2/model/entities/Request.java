@@ -1,6 +1,7 @@
 package lab2.model.entities;
 
 import com.sun.istack.internal.NotNull;
+import lab2.controller.util.DatePair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

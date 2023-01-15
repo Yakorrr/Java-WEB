@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import lab2.controller.dao.RequestDAO;
 import lab2.controller.dao.UserDAO;
 import lab2.model.enums.RoomClass;
-import lab2.model.entities.DatePair;
+import lab2.controller.util.DatePair;
 import lab2.model.entities.Request;
 import lab2.model.entities.User;
 
